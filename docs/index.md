@@ -10,7 +10,7 @@ hide:
 **open-java-format** is a deterministic formatter for Java. There is one style and nothing to tune,
 so every file comes out the same way, whether a person or a model wrote it.
 
-[Quick start](#quick-start){ .md-button .md-button--primary }
+[Get started](get-started/index.md){ .md-button .md-button--primary }
 [View on GitHub](https://github.com/openjavaformat/open-java-format){ .md-button }
 
 ## Why formatting comes first
@@ -110,8 +110,14 @@ chain breaks into one call per line.
     }
     ```
 
-The plugin configures IntelliJ IDEA to use the formatter and adds the `formatDiff` task, which
-formats only the lines you changed in git.
+``` properties title="gradle.properties"
+openjavaformat.native.formatter=true
+```
+
+The plugin adds the `formatDiff` task, which formats only the lines you changed in git, and it keeps
+IntelliJ IDEA on the formatter version of the build. The property makes Gradle run the formatter as
+a native binary on Linux and macOS. For Windows and for multi-project builds see
+[Gradle plugin](get-started/gradle.md).
 
 ### On the command line
 
@@ -126,6 +132,8 @@ open-java-format --ojf --replace src/main/java/com/example/Hello.java
 open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
 ```
 
+Downloads, checksums and every option are on the [Command line](get-started/command-line.md) page.
+
 ### In CI with GitHub Actions
 
 ``` yaml title=".github/workflows/format.yml"
@@ -137,7 +145,9 @@ open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
 ```
 
 The [action](https://github.com/openjavaformat/open-java-format-action) downloads the native binary
-and fails the job when a changed file is not formatted. It needs no Java on the runner.
+and fails the job when a changed file is not formatted. It needs no Java on the runner. The
+[GitHub Action and pre-commit](get-started/github-actions.md) page has the full workflow and a git
+hook that runs the same check.
 
 ## A drop-in for palantir-java-format
 

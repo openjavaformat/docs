@@ -16,6 +16,14 @@ edit_uri = "https://github.com/openjavaformat/docs/edit/main/docs/"
 
 nav = [
   { "Home" = "index.md" },
+  { "Get started" = [
+    "get-started/index.md",
+    { "Gradle plugin" = "get-started/gradle.md" },
+    { "Command line" = "get-started/command-line.md" },
+    { "IntelliJ IDEA" = "get-started/intellij-idea.md" },
+    { "Eclipse" = "get-started/eclipse.md" },
+    { "GitHub Action and pre-commit" = "get-started/github-actions.md" },
+  ] },
   { "Manifesto" = "manifesto.md" },
 ]
 
