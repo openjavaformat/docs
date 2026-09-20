@@ -6,10 +6,14 @@ it is deciding *where* to break and what to line up, not laying everything out u
 
 | File | Use |
 |---|---|
-| `../overrides/.icons/ojf/logo.svg` | The mark, in the place where the site inlines it as its logo. Inherits `currentColor`, so one file covers light, dark and monochrome. |
-| `../docs/assets/favicon.svg` | Same geometry, guide at full strength. Below ~24px contrast is what keeps the guide visible, not shape. |
+| `icon.svg` | The mark. Inherits `currentColor`, so one file covers light, dark and monochrome. |
+| `favicon.svg` | Same geometry, guide at full strength. Below ~24px contrast is what keeps the guide visible, not shape. |
 | `avatar.svg` | The mark on a white rounded square, for the GitHub organisation and marketplace tiles. |
 | `avatar-512.png`, `avatar-128.png` | Rasterised from `avatar.svg`; GitHub organisation avatars must be raster. |
+
+The site uses copies of two of these files: `overrides/.icons/ojf/logo.svg` is `icon.svg`, inlined as
+the header logo so that it inherits the header colour, and `docs/assets/favicon.svg` is
+`favicon.svg`. After editing either file here, copy it over.
 
 Regenerate the PNGs after editing the SVG:
 
