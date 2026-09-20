@@ -92,52 +92,52 @@ chain breaks into one call per line.
 
 ## Quick start
 
-=== "Gradle"
+### In a Gradle build
 
-    === "Groovy"
+=== "Groovy"
 
-        ``` groovy title="build.gradle"
-        plugins {
-            id 'dev.openjavaformat.java-format' version '2.98.0.1'
-        }
-        ```
-
-    === "Kotlin"
-
-        ``` kotlin title="build.gradle.kts"
-        plugins {
-            id("dev.openjavaformat.java-format") version "2.98.0.1"
-        }
-        ```
-
-    The plugin configures IntelliJ IDEA to use the formatter and adds the `formatDiff` task, which
-    formats only the lines you changed in git.
-
-=== "Command line"
-
-    Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries
-    native binaries for Linux and macOS, and a runnable jar for Java 21 or later.
-
-    ``` sh title="Format files in place"
-    open-java-format --ojf --replace src/main/java/com/example/Hello.java
+    ``` groovy title="build.gradle"
+    plugins {
+        id 'dev.openjavaformat.java-format' version '2.98.0.1'
+    }
     ```
 
-    ``` sh title="Fail when anything is not formatted"
-    open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
+=== "Kotlin"
+
+    ``` kotlin title="build.gradle.kts"
+    plugins {
+        id("dev.openjavaformat.java-format") version "2.98.0.1"
+    }
     ```
 
-=== "GitHub Actions"
+The plugin configures IntelliJ IDEA to use the formatter and adds the `formatDiff` task, which
+formats only the lines you changed in git.
 
-    ``` yaml title=".github/workflows/format.yml"
-    - uses: actions/checkout@v7
+### On the command line
 
-    - uses: openjavaformat/open-java-format-action@v1
-      with:
-        version: '2.98.0.1'
-    ```
+Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries native
+binaries for Linux and macOS, and a runnable jar for Java 21 or later.
 
-    The [action](https://github.com/openjavaformat/open-java-format-action) downloads the native
-    binary and fails the job when a changed file is not formatted. It needs no Java on the runner.
+``` sh title="Format files in place"
+open-java-format --ojf --replace src/main/java/com/example/Hello.java
+```
+
+``` sh title="Fail when anything is not formatted"
+open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
+```
+
+### In CI with GitHub Actions
+
+``` yaml title=".github/workflows/format.yml"
+- uses: actions/checkout@v7
+
+- uses: openjavaformat/open-java-format-action@v1
+  with:
+    version: '2.98.0.1'
+```
+
+The [action](https://github.com/openjavaformat/open-java-format-action) downloads the native binary
+and fails the job when a changed file is not formatted. It needs no Java on the runner.
 
 ## A drop-in for palantir-java-format
 
