@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+
+  # Zensical is pinned in requirements.txt. It is pre-1.0 and releases every few days, so a
+  # bump arrives as a pull request that the strict build has to pass before it is merged.
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"

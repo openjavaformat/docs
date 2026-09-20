@@ -1,0 +1,8 @@
+# Zensical build output and cache
+/site/
+/.cache/
+
+# Local Python environment
+/.venv/
+
+.DS_Store

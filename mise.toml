@@ -1,0 +1,22 @@
+# Development tooling for the openjavaformat.dev site (repository openjavaformat/docs).
+#
+[tools]
+python = "3.14"
+
+# mise creates .venv on first use and activates it, so the tasks below see the pinned Zensical.
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+[tasks.install]
+description = "Install the Zensical version pinned in requirements.txt into .venv"
+run = "pip install --quiet --disable-pip-version-check -r requirements.txt"
+
+[tasks.serve]
+description = "Preview the site on http://localhost:8000 with live reload"
+depends = ["install"]
+run = "zensical serve"
+
+[tasks.build]
+description = "Build the site into site/ the same way CI does: clean and strict"
+depends = ["install"]
+run = "zensical build --clean --strict"
