@@ -1,6 +1,146 @@
-# open-java-format
+---
+title: The first guardrail for AI-written Java
+hide:
+  - navigation
+  - toc
+---
 
-A modern, lambda-friendly, 120-character Java formatter, built in the open.
+# The first guardrail for AI-written Java
 
-This site is being set up. Until the documentation lands here, everything lives in the
-[project README](https://github.com/openjavaformat/open-java-format#readme).
+**open-java-format** is a deterministic formatter for Java. There is one style and nothing to tune,
+so every file comes out the same way, whether a person or a model wrote it.
+
+[Quick start](#quick-start){ .md-button .md-button--primary }
+[View on GitHub](https://github.com/openjavaformat/open-java-format){ .md-button }
+
+## Why formatting comes first
+
+<div class="grid cards" markdown>
+
+-   :lucide-equal:{ .lg .middle } __One style, nothing to tune__
+
+    ---
+
+    The output depends only on the input. There is no line-length setting, no indentation setting
+    and no per-team dialect for an agent to get wrong. The IDE, the command line and CI all produce
+    the same bytes.
+
+-   :lucide-git-pull-request-arrow:{ .lg .middle } __Diffs a reviewer can read__
+
+    ---
+
+    Models write a lot of code quickly. When all of it is laid out the same way, a diff shows what
+    changed in the logic, not how a particular model likes to wrap its lines.
+
+-   :lucide-zap:{ .lg .middle } __Fast enough to run after every edit__
+
+    ---
+
+    The formatter ships as a native binary with no JVM to start, so it fits into an agent hook, a
+    pre-commit hook or a CI step. It also comes as a Gradle plugin and as plugins for IntelliJ IDEA
+    and Eclipse.
+
+</div>
+
+A formatter does not find bugs. It is the first check in the chain, ahead of the compiler, static
+analysis, tests and review, and it is the cheapest one to automate.
+
+## What the output looks like
+
+Lines are up to 120 characters wide. A lambda stays on the line where it starts, and a long call
+chain breaks into one call per line.
+
+=== "open-java-format"
+
+    ``` java
+    private static void configureResolvedVersionsWithVersionMapping(Project project) {
+        project.getPluginManager().withPlugin("maven-publish", plugin -> {
+            project.getExtensions()
+                    .getByType(PublishingExtension.class)
+                    .getPublications()
+                    .withType(MavenPublication.class)
+                    .configureEach(publication -> publication.versionMapping(mapping -> {
+                        mapping.allVariants(VariantVersionMappingStrategy::fromResolutionResult);
+                    }));
+        });
+    }
+    ```
+
+=== "google-java-format"
+
+    ``` java
+    private static void configureResolvedVersionsWithVersionMapping(Project project) {
+        project.getPluginManager()
+                .withPlugin(
+                        "maven-publish",
+                        plugin -> {
+                            project.getExtensions()
+                                    .getByType(PublishingExtension.class)
+                                    .getPublications()
+                                    .withType(MavenPublication.class)
+                                    .configureEach(
+                                            publication ->
+                                                    publication.versionMapping(
+                                                            mapping -> {
+                                                                mapping.allVariants(
+                                                                        VariantVersionMappingStrategy
+                                                                                ::fromResolutionResult);
+                                                            }));
+                        });
+    }
+    ```
+
+## Quick start
+
+=== "Gradle"
+
+    === "Groovy"
+
+        ``` groovy title="build.gradle"
+        plugins {
+            id 'dev.openjavaformat.java-format' version '2.98.0.1'
+        }
+        ```
+
+    === "Kotlin"
+
+        ``` kotlin title="build.gradle.kts"
+        plugins {
+            id("dev.openjavaformat.java-format") version "2.98.0.1"
+        }
+        ```
+
+    The plugin configures IntelliJ IDEA to use the formatter and adds the `formatDiff` task, which
+    formats only the lines you changed in git.
+
+=== "Command line"
+
+    Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries
+    native binaries for Linux and macOS, and a runnable jar for Java 21 or later.
+
+    ``` sh title="Format files in place"
+    open-java-format --ojf --replace src/main/java/com/example/Hello.java
+    ```
+
+    ``` sh title="Fail when anything is not formatted"
+    open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
+    ```
+
+=== "GitHub Actions"
+
+    ``` yaml title=".github/workflows/format.yml"
+    - uses: actions/checkout@v7
+
+    - uses: openjavaformat/open-java-format-action@v1
+      with:
+        version: '2.98.0.1'
+    ```
+
+    The [action](https://github.com/openjavaformat/open-java-format-action) downloads the native
+    binary and fails the job when a changed file is not formatted. It needs no Java on the runner.
+
+## A drop-in for palantir-java-format
+
+For the whole 2.x line the output is byte-for-byte the same as the palantir-java-format release
+with the same version number, and the Java packages are unchanged. Migrating means changing the
+coordinates and nothing else.

@@ -16,6 +16,7 @@ edit_uri = "https://github.com/openjavaformat/docs/edit/main/docs/"
 
 nav = [
   { "Home" = "index.md" },
+  { "Manifesto" = "manifesto.md" },
 ]
 
 # extra_css = ["stylesheets/extra.css"]
@@ -49,7 +50,7 @@ features = [
   "navigation.path",
   # "navigation.prune",
   "navigation.sections",
-  # "navigation.tabs",
+  "navigation.tabs",
   # "navigation.tabs.sticky",
   "navigation.top",
   "navigation.tracking",
