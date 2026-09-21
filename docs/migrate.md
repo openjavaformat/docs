@@ -2,15 +2,16 @@
 
 ## From palantir-java-format
 
-open-java-format 2.98.0.1 is the code of palantir-java-format 2.98.0 under new names, built in the
-open. The output is the same, so switching produces no formatting diff and needs no reformatting
-commit. Checked on 132 source files, about 27,000 lines: both formatters give byte-identical output.
+open-java-format {{ ojf_version }} formats with the code of palantir-java-format 2.98.0, under new names
+and built in the open. The output is the same, so switching produces no formatting diff and needs no
+reformatting commit. Checked on 341 source files, about 24,000 lines: palantir-java-format 2.98.0 and
+open-java-format 2.98.0.2 give byte-identical output.
 
 The Java packages are unchanged as well. Only the names in your build and your scripts change.
 
 | | palantir-java-format | open-java-format |
 | --- | --- | --- |
-| Version | `2.98.0` | `2.98.0.1` |
+| Version | `2.98.0` | `{{ ojf_version }}` |
 | Maven group | `com.palantir.javaformat` | `dev.openjavaformat` |
 | Formatter | `palantir-java-format` | `open-java-format` |
 | SPI | `palantir-java-format-spi` | `open-java-format-spi` |
@@ -21,15 +22,15 @@ The Java packages are unchanged as well. Only the names in your build and your s
 | IntelliJ plugin | `palantir-java-format` | `open-java-format` |
 | Java packages | `com.palantir.javaformat.*` | the same, for the whole 2.x line |
 
-The fourth number of the version counts builds of an upstream version: 2.98.0.1 is the first build
-of 2.98.0.
+The fourth number of the version counts builds of an upstream version: 2.98.0.1 was the first build
+of 2.98.0, and 2.98.0.2 is the second.
 
 ### Gradle
 
 ``` diff title="build.gradle"
  plugins {
 -    id 'com.palantir.java-format' version '2.98.0'
-+    id 'dev.openjavaformat.java-format' version '2.98.0.1'
++    id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
  }
 ```
 
@@ -58,7 +59,7 @@ Change the coordinates. The imports stay as they are, because the packages did n
 
 ``` diff title="build.gradle"
 -implementation 'com.palantir.javaformat:palantir-java-format:2.98.0'
-+implementation 'dev.openjavaformat:open-java-format:2.98.0.1'
++implementation 'dev.openjavaformat:open-java-format:{{ ojf_version }}'
 ```
 
 In a `pom.xml` it is the same change of `groupId`, `artifactId` and `version`.
