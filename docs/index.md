@@ -98,7 +98,7 @@ chain breaks into one call per line.
 
     ``` groovy title="build.gradle"
     plugins {
-        id 'dev.openjavaformat.java-format' version '2.98.0.1'
+        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
     }
     ```
 
@@ -106,7 +106,7 @@ chain breaks into one call per line.
 
     ``` kotlin title="build.gradle.kts"
     plugins {
-        id("dev.openjavaformat.java-format") version "2.98.0.1"
+        id("dev.openjavaformat.java-format") version "{{ ojf_version }}"
     }
     ```
 
@@ -141,7 +141,7 @@ Downloads, checksums and every option are on the [Command line](get-started/comm
 
 - uses: openjavaformat/open-java-format-action@v1
   with:
-    version: '2.98.0.1'
+    version: '{{ ojf_version }}'
 ```
 
 The [action](https://github.com/openjavaformat/open-java-format-action) downloads the native binary

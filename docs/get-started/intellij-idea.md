@@ -24,7 +24,7 @@ has an **Install to IDE** button that does the same for an IDE that is already r
 
 A version that is not on the Marketplace yet can be installed from a release.
 
-1. Download `open-java-format-idea-plugin-2.98.0.1.zip` from the
+1. Download `open-java-format-idea-plugin-{{ ojf_version }}.zip` from the
    [latest release](https://github.com/openjavaformat/open-java-format/releases/latest). Do not
    unpack it.
 2. Open **Settings**, go to **Plugins**, click the gear icon and choose **Install Plugin from

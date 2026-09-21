@@ -16,7 +16,7 @@ that line.
     plugins {
         id 'java'
         id 'com.diffplug.spotless' version '8.10.2'
-        id 'dev.openjavaformat.java-format' version '2.98.0.1'
+        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
     }
 
     repositories {
@@ -30,7 +30,7 @@ that line.
     plugins {
         java
         id("com.diffplug.spotless") version "8.10.2"
-        id("dev.openjavaformat.java-format") version "2.98.0.1"
+        id("dev.openjavaformat.java-format") version "{{ ojf_version }}"
     }
 
     repositories {
@@ -72,7 +72,7 @@ The pull request [diffplug/spotless#3084](https://github.com/diffplug/spotless/p
 
 ``` xml title="pom.xml, with the pull request merged"
 <openJavaFormat>
-  <version>2.98.0.1</version>
+  <version>{{ ojf_version }}</version>
 </openJavaFormat>
 ```
 

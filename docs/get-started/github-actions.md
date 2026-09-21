@@ -19,8 +19,8 @@ jobs:
 
       - uses: openjavaformat/open-java-format-action@v1
         with:
-          version: '2.98.0.1'
-          mode: ${{ github.event_name == 'push' && 'all' || 'changed' }}
+          version: '{{ ojf_version }}'
+          mode: {% raw %}${{ github.event_name == 'push' && 'all' || 'changed' }}{% endraw %}
 ```
 
 The [action](https://github.com/openjavaformat/open-java-format-action) downloads the binary, lists

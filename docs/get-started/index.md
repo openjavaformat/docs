@@ -5,7 +5,7 @@ the same formatter, so they all produce the same files. Set up the ones your pro
 
 !!! info "Requirements"
 
-    The current version is **2.98.0.1**. Everything except the native binaries needs Java 21 or
+    The current version is **{{ ojf_version }}**. Everything except the native binaries needs Java 21 or
     later, and the Gradle plugin needs Gradle 9.
 
 <div class="grid cards" markdown>

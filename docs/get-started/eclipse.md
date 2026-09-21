@@ -5,7 +5,7 @@ run on Java 21 or later, as current Eclipse packages do.
 
 ## Install
 
-1. Download `open-java-format-eclipse-plugin-2.98.0.1.jar` from the
+1. Download `open-java-format-eclipse-plugin-{{ ojf_version }}.jar` from the
    [latest release](https://github.com/openjavaformat/open-java-format/releases/latest).
 2. Open `eclipse.ini` and add these lines after `-vmargs`. The formatter reaches into javac, and
    these options allow it.

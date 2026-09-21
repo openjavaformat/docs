@@ -10,7 +10,7 @@ formatter version as the build. It needs Gradle 9 and a Gradle daemon running on
     ``` groovy title="build.gradle"
     plugins {
         id 'java'
-        id 'dev.openjavaformat.java-format' version '2.98.0.1'
+        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
     }
 
     repositories {
@@ -23,7 +23,7 @@ formatter version as the build. It needs Gradle 9 and a Gradle daemon running on
     ``` kotlin title="build.gradle.kts"
     plugins {
         java
-        id("dev.openjavaformat.java-format") version "2.98.0.1"
+        id("dev.openjavaformat.java-format") version "{{ ojf_version }}"
     }
 
     repositories {
@@ -82,7 +82,7 @@ is resolved by the root project, so the root project needs the repository too.
 
     ``` groovy title="build.gradle"
     plugins {
-        id 'dev.openjavaformat.java-format' version '2.98.0.1' apply false
+        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}' apply false
     }
 
     allprojects {
@@ -101,7 +101,7 @@ is resolved by the root project, so the root project needs the repository too.
 
     ``` kotlin title="build.gradle.kts"
     plugins {
-        id("dev.openjavaformat.java-format") version "2.98.0.1" apply false
+        id("dev.openjavaformat.java-format") version "{{ ojf_version }}" apply false
     }
 
     allprojects {

@@ -14,12 +14,12 @@ Pick the file for your platform from the
 | Linux AArch64, glibc | `open-java-format-linux-glibc_aarch64` |
 | macOS, Apple silicon | `open-java-format-macos_aarch64` |
 | macOS, Intel | `open-java-format-macos_x86-64` |
-| Anything else with Java 21 or later | `open-java-format-2.98.0.1-all.jar` |
+| Anything else with Java 21 or later | `open-java-format-{{ ojf_version }}-all.jar` |
 
 There is no native binary for Windows or for musl-based Linux such as Alpine. Use the jar there.
 
 ``` sh title="Native binary, here for Apple silicon"
-curl -LO https://github.com/openjavaformat/open-java-format/releases/download/2.98.0.1/open-java-format-macos_aarch64
+curl -LO https://github.com/openjavaformat/open-java-format/releases/download/{{ ojf_version }}/open-java-format-macos_aarch64
 chmod +x open-java-format-macos_aarch64
 ./open-java-format-macos_aarch64 --version
 ```
@@ -34,8 +34,8 @@ assume you did.
     not get the flag.
 
 ``` sh title="Runnable jar"
-curl -LO https://github.com/openjavaformat/open-java-format/releases/download/2.98.0.1/open-java-format-2.98.0.1-all.jar
-java -jar open-java-format-2.98.0.1-all.jar --version
+curl -LO https://github.com/openjavaformat/open-java-format/releases/download/{{ ojf_version }}/open-java-format-{{ ojf_version }}-all.jar
+java -jar open-java-format-{{ ojf_version }}-all.jar --version
 ```
 
 The jar carries its dependencies and the `Add-Exports` entries the formatter needs, so it runs
