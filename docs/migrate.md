@@ -64,6 +64,11 @@ Change the coordinates. The imports stay as they are, because the packages did n
 
 In a `pom.xml` it is the same change of `groupId`, `artifactId` and `version`.
 
+### Spotless
+
+With Gradle, remove `palantirJavaFormat()` from the `spotless` block and apply our plugin, which adds
+its own step. Maven has no way yet. [Spotless](get-started/spotless.md) has both.
+
 ### IntelliJ IDEA
 
 1. Disable or uninstall the palantir-java-format plugin. Both plugins take over **Reformat Code**

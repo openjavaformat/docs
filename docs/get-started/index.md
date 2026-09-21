@@ -17,6 +17,12 @@ the same formatter, so they all produce the same files. Set up the ones your pro
     Formats the lines you changed with `formatDiff` and keeps IntelliJ IDEA on the same formatter
     version as the build.
 
+-   :lucide-spray-can:{ .lg .middle } __[Spotless](spotless.md)__
+
+    ---
+
+    Works with Gradle through our plugin. Maven waits for a pull request in Spotless.
+
 -   :lucide-terminal:{ .lg .middle } __[Command line](command-line.md)__
 
     ---

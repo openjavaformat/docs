@@ -19,6 +19,7 @@ nav = [
   { "Get started" = [
     "get-started/index.md",
     { "Gradle plugin" = "get-started/gradle.md" },
+    { "Spotless" = "get-started/spotless.md" },
     { "Command line" = "get-started/command-line.md" },
     { "IntelliJ IDEA" = "get-started/intellij-idea.md" },
     { "Eclipse" = "get-started/eclipse.md" },

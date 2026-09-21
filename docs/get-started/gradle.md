@@ -61,6 +61,9 @@ of the two settings below, `formatDiff` fails with an `IllegalAccessError` that 
     This works on every platform, Windows included. If the file already sets
     `org.gradle.jvmargs`, add the flags to that line instead of writing a second one.
 
+A build that also applies Spotless needs the JVM flags: the Spotless step runs on the Gradle JVM
+even when the native binary is switched on. See [Spotless](spotless.md).
+
 ## Format what you changed
 
 ``` sh
