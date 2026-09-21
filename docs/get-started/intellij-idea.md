@@ -7,9 +7,22 @@ stop applying.
 The plugin needs IntelliJ IDEA 2024.2 or later, or another JetBrains IDE with Java support, such as
 Android Studio.
 
+<iframe src="https://plugins.jetbrains.com/embeddable/card/34359" width="384" height="319" title="open-java-format on the JetBrains Marketplace" loading="lazy" style="border: 0; max-width: 100%;"></iframe>
+
 ## Install
 
-The plugin is not on the JetBrains Marketplace yet, so it is installed from a file.
+### From the JetBrains Marketplace
+
+1. Open **Settings**, go to **Plugins** and switch to the **Marketplace** tab.
+2. Search for **open-java-format** and click **Install**.
+3. Restart the IDE.
+
+The [plugin page](https://plugins.jetbrains.com/plugin/34359-open-java-format) on the Marketplace
+has an **Install to IDE** button that does the same for an IDE that is already running.
+
+### From a file
+
+A version that is not on the Marketplace yet can be installed from a release.
 
 1. Download `open-java-format-idea-plugin-2.98.0.1.zip` from the
    [latest release](https://github.com/openjavaformat/open-java-format/releases/latest). Do not
