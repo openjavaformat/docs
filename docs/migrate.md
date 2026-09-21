@@ -16,7 +16,7 @@ The Java packages are unchanged as well. Only the names in your build and your s
 | SPI | `palantir-java-format-spi` | `open-java-format-spi` |
 | Gradle plugin | `com.palantir.java-format` | `dev.openjavaformat.java-format` |
 | Gradle property | `palantir.native.formatter` | `openjavaformat.native.formatter` |
-| Command-line style flag | `--palantir` | `--ojf` |
+| Command-line style flag | `--palantir` | none: there is one style |
 | Style in the API | `PALANTIR` | `OJF` |
 | IntelliJ plugin | `palantir-java-format` | `open-java-format` |
 | Java packages | `com.palantir.javaformat.*` | the same, for the whole 2.x line |
@@ -43,15 +43,14 @@ settings and multi-project builds.
 
 ### Command line and scripts
 
-Replace `--palantir` with `--ojf`, and take the binary or the jar from
+Remove `--palantir`: there is one style, so no flag chooses it. Take the binary or the jar from
 [our releases](get-started/command-line.md).
 
-!!! warning "The old flag does not fail"
+!!! note "A leftover flag fails the run"
 
-    `--palantir` is no longer accepted, but it is not an error either: the formatter prints
-    `unexpected flag: --palantir` with its usage text and exits with 0. A CI step that still passes
-    the old flag would go green without checking anything. Search your scripts and workflows for
-    it.
+    An unknown flag such as `--palantir` stops the formatter with exit code 2, so a CI step that
+    still passes it fails instead of going green. Version 2.98.0.1 printed its usage text there and
+    exited with 0, without checking anything.
 
 ### Libraries that call the formatter
 
@@ -95,7 +94,7 @@ the same method in both styles.
 2. Format everything once and commit only that:
 
     ``` sh
-    open-java-format --ojf --replace $(git ls-files '*.java')
+    open-java-format --replace $(git ls-files '*.java')
     git commit -am "Reformat with open-java-format"
     ```
 

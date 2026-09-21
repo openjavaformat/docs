@@ -1,7 +1,7 @@
 # GitHub Action and pre-commit
 
 Both checks run the native binary, so they need no Java, Maven or Gradle. They work on Linux with
-glibc and on macOS. There is no native binary for Windows or for musl-based Linux such as Alpine.
+glibc and on macOS, and stop with an error on Windows and on musl-based Linux such as Alpine.
 
 ## Check pull requests and pushes
 
@@ -41,7 +41,7 @@ Run the formatter locally with the same version, then commit the result. See
 [Command line](command-line.md) for the download.
 
 ``` sh
-open-java-format --ojf --replace path/to/File.java
+open-java-format --replace path/to/File.java
 ```
 
 ## Exclude files

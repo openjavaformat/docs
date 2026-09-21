@@ -81,7 +81,7 @@ and [`jq`](https://jqlang.org/), which takes the path of the file out of that JS
         "hooks": [
           {
             "type": "command",
-            "command": "open-java-format --ojf --skip-removing-unused-imports --replace \"$(jq -r '.tool_input.file_path')\" || exit 2"
+            "command": "open-java-format --skip-removing-unused-imports --replace \"$(jq -r '.tool_input.file_path')\""
           }
         ]
       }
@@ -102,8 +102,8 @@ it in the next. A full format after the first edit would delete that import, so 
 imports that really are unused.
 
 **A file that does not parse goes back to the agent.** The formatter leaves the file as it is,
-prints the error and exits with 1. `|| exit 2` turns that into 2, the exit code that makes Claude
-Code show a hook's message to the model, so Claude sees it right after its edit:
+prints the error and exits with 2, the exit code that makes Claude Code show a hook's message to
+the model, so Claude sees it right after its edit:
 
 ``` text
 src/main/java/com/example/Broken.java:5:22: error: ';' expected
@@ -128,13 +128,13 @@ for coding agents. Add a section that matches how the project runs the formatter
     After you create or edit a `.java` file, format it:
 
     ```sh
-    open-java-format --ojf --replace path/to/File.java
+    open-java-format --replace path/to/File.java
     ```
 
     Before you commit, run this check. It must print nothing, so format every file it lists:
 
     ```sh
-    open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
+    open-java-format --dry-run --set-exit-if-changed $(git ls-files '*.java')
     ```
     ````
 
