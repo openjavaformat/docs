@@ -2,7 +2,7 @@
 [project]
 site_url = "https://openjavaformat.dev/"
 site_name = "open-java-format"
-site_description = "A modern, lambda-friendly, 120-character Java formatter, built in the open."
+site_description = "A deterministic, lambda-friendly formatter for Java code: one style, 120-character lines, nothing to tune, built in the open."
 # site_author = "Your name"
 
 # copyright = "Copyright &copy; 2026 Your name"
