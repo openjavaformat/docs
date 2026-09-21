@@ -70,25 +70,7 @@ session. A `PostToolUse` hook on the `Edit` and `Write` tools runs after every f
 changes, and it gets the tool call as JSON on its standard input.
 
 The hook needs `open-java-format` on the `PATH`, see [Command line](get-started/command-line.md),
-and [`jq`](https://jqlang.org/).
-
-``` sh title=".claude/hooks/format-java.sh"
-#!/bin/sh
-# Claude Code runs this after every Edit and Write and passes the tool call as JSON on stdin.
-file=$(jq -r '.tool_input.file_path // empty')
-
-case "$file" in
-    *.java) ;;
-    *) exit 0 ;;
-esac
-
-# Exit code 2 makes Claude Code show the formatter's message to the model.
-open-java-format --ojf --skip-removing-unused-imports --replace "$file" || exit 2
-```
-
-``` sh
-chmod +x .claude/hooks/format-java.sh
-```
+and [`jq`](https://jqlang.org/), which takes the path of the file out of that JSON.
 
 ``` json title=".claude/settings.json"
 {
@@ -99,8 +81,7 @@ chmod +x .claude/hooks/format-java.sh
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/format-java.sh",
-            "args": []
+            "command": "open-java-format --ojf --skip-removing-unused-imports --replace \"$(jq -r '.tool_input.file_path')\" || exit 2"
           }
         ]
       }
@@ -109,17 +90,20 @@ chmod +x .claude/hooks/format-java.sh
 }
 ```
 
-Commit both files, and everyone who opens the project in Claude Code gets the hook. To keep it to
+Commit the file, and everyone who opens the project in Claude Code gets the hook. To keep it to
 yourself, put the `hooks` block into `.claude/settings.local.json` instead.
+
+**Other files pass through.** The formatter skips a file that is not Java and exits with 0, so the
+hook needs no filter of its own.
 
 **Unused imports stay for now.** An agent often adds an import in one edit and the code that uses
 it in the next. A full format after the first edit would delete that import, so the hook passes
 `--skip-removing-unused-imports`. The pre-commit hook and CI run the full check, and they catch the
 imports that really are unused.
 
-**A file that does not parse goes back to the agent.** The formatter leaves the file as it is and
-prints the error. The script then exits with 2, the exit code that makes Claude Code show a hook's
-message to the model, so Claude sees it right after its edit:
+**A file that does not parse goes back to the agent.** The formatter leaves the file as it is,
+prints the error and exits with 1. `|| exit 2` turns that into 2, the exit code that makes Claude
+Code show a hook's message to the model, so Claude sees it right after its edit:
 
 ``` text
 src/main/java/com/example/Broken.java:5:22: error: ';' expected
