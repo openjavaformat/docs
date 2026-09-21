@@ -26,12 +26,14 @@ nav = [
     { "GitHub Action and pre-commit" = "get-started/github-actions.md" },
   ] },
   { "AI agents" = "ai-agents.md" },
+  { "Style" = "style.md" },
   { "Library rules" = [
     "library-rules/index.md",
     { "Flogger" = "library-rules/flogger.md" },
   ] },
   { "Migrate" = "migrate.md" },
   { "Manifesto" = "manifesto.md" },
+  { "About" = "about.md" },
 ]
 
 # extra_css = ["stylesheets/extra.css"]
