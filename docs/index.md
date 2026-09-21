@@ -36,9 +36,9 @@ so every file comes out the same way, whether a person or a model wrote it.
 
     ---
 
-    The formatter ships as a native binary with no JVM to start, so it fits into an agent hook, a
-    pre-commit hook or a CI step. It also comes as a Gradle plugin and as plugins for IntelliJ IDEA
-    and Eclipse.
+    The formatter ships as a native binary with no JVM to start, so it fits into an
+    [agent hook](ai-agents.md), a pre-commit hook or a CI step. It also comes as a Gradle plugin
+    and as plugins for IntelliJ IDEA and Eclipse.
 
 </div>
 

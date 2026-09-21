@@ -24,6 +24,7 @@ nav = [
     { "Eclipse" = "get-started/eclipse.md" },
     { "GitHub Action and pre-commit" = "get-started/github-actions.md" },
   ] },
+  { "AI agents" = "ai-agents.md" },
   { "Manifesto" = "manifesto.md" },
 ]
 
