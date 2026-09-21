@@ -139,7 +139,7 @@ Downloads, checksums and every option are on the [Command line](get-started/comm
 ``` yaml title=".github/workflows/format.yml"
 - uses: actions/checkout@v7
 
-- uses: openjavaformat/open-java-format-action@v1
+- uses: openjavaformat/open-java-format-action@v2
   with:
     version: '{{ ojf_version }}'
 ```
