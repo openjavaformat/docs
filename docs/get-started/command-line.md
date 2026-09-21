@@ -14,11 +14,9 @@ Pick the file for your platform from the
 | Linux AArch64, glibc | `open-java-format-linux-glibc_aarch64` |
 | macOS, Apple silicon | `open-java-format-macos_aarch64` |
 | macOS, Intel | `open-java-format-macos_x86-64` |
-| Windows, x86-64 | `open-java-format-windows_x86-64.exe` |
 | Anything else with Java 21 or later | `open-java-format-{{ ojf_version }}-all.jar` |
 
-There is no native binary for Windows on ARM or for musl-based Linux such as Alpine. Use the jar
-there.
+There is no native binary for Windows or for musl-based Linux such as Alpine. Use the jar there.
 
 ``` sh title="Native binary, here for Apple silicon"
 curl -LO https://github.com/openjavaformat/open-java-format/releases/download/{{ ojf_version }}/open-java-format-macos_aarch64
@@ -26,8 +24,8 @@ chmod +x open-java-format-macos_aarch64
 ./open-java-format-macos_aarch64 --version
 ```
 
-Rename the file to `open-java-format`, or `open-java-format.exe` on Windows, and move it to a
-directory on your `PATH`. The examples below assume you did.
+Rename the file to `open-java-format` and move it to a directory on your `PATH`. The examples below
+assume you did.
 
 !!! note "macOS and files downloaded with a browser"
 
@@ -61,32 +59,33 @@ Every release has a `checksums_sha256.txt`. Download it next to your file and ch
 
 ## Format and check
 
-There is one style, so no flag chooses it. Version 2.98.0.1 needed `--ojf`: later versions still
-accept it, print a warning and format as usual, so drop it from your scripts.
+Pass `--ojf` every time. Without a style flag the formatter uses Google Java Style, and the old
+`--palantir` flag is no longer accepted.
 
 ``` sh title="Format files in place"
-open-java-format --replace src/main/java/com/example/Hello.java
+open-java-format --ojf --replace src/main/java/com/example/Hello.java
 ```
 
 ``` sh title="Format every tracked Java file"
-open-java-format --replace $(git ls-files '*.java')
+open-java-format --ojf --replace $(git ls-files '*.java')
 ```
 
 ``` sh title="Check without changing anything"
-open-java-format --dry-run --set-exit-if-changed $(git ls-files '*.java')
+open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
 ```
 
 The check prints the files that would change and exits with 1 if there are any, which is what a CI
 step needs.
 
 ``` sh title="Format standard input"
-cat Hello.java | open-java-format -
+cat Hello.java | open-java-format --ojf -
 ```
 
 ## Options
 
 | Option | What it does |
 | --- | --- |
+| `--ojf` | Use the open-java-format style: 120 columns, 4-space indents |
 | `--replace`, `-i` | Write the result back to the files instead of printing it |
 | `--dry-run`, `-n` | Print the files that would change, change nothing |
 | `--set-exit-if-changed` | Exit with 1 if anything would change |
@@ -98,14 +97,3 @@ cat Hello.java | open-java-format -
 | `--skip-reflowing-long-strings` | Do not rewrap string literals that pass the column limit |
 | `@file` | Read options and file names from a file |
 | `--version`, `--help` | Print the version, or every option |
-
-## Exit codes
-
-| Code | Meaning |
-| --- | --- |
-| 0 | Every file was formatted or checked without a problem |
-| 1 | With `--set-exit-if-changed`: a file is not formatted |
-| 2 | A file could not be read, parsed or written, or an option is wrong. The reason is on standard error |
-
-A file that does not parse is left as it is. When a run hits both, a file that is not formatted and
-one it cannot format, the exit code is 2.

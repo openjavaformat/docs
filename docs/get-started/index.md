@@ -27,8 +27,8 @@ the same formatter, so they all produce the same files. Set up the ones your pro
 
     ---
 
-    A native binary for Linux, macOS and Windows, or a runnable jar anywhere else. Formats files in
-    place or checks them.
+    A native binary for Linux and macOS, or a runnable jar anywhere else. Formats files in place or
+    checks them.
 
 -   :simple-intellijidea:{ .lg .middle } __[IntelliJ IDEA](intellij-idea.md)__
 

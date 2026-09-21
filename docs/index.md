@@ -122,14 +122,14 @@ a native binary on Linux and macOS. For Windows and for multi-project builds see
 ### On the command line
 
 Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries native
-binaries for Linux, macOS and Windows, and a runnable jar for Java 21 or later.
+binaries for Linux and macOS, and a runnable jar for Java 21 or later.
 
 ``` sh title="Format files in place"
-open-java-format --replace src/main/java/com/example/Hello.java
+open-java-format --ojf --replace src/main/java/com/example/Hello.java
 ```
 
 ``` sh title="Fail when anything is not formatted"
-open-java-format --dry-run --set-exit-if-changed $(git ls-files '*.java')
+open-java-format --ojf --dry-run --set-exit-if-changed $(git ls-files '*.java')
 ```
 
 Downloads, checksums and every option are on the [Command line](get-started/command-line.md) page.
