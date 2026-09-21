@@ -29,6 +29,7 @@ nav = [
     "library-rules/index.md",
     { "Flogger" = "library-rules/flogger.md" },
   ] },
+  { "Migrate" = "migrate.md" },
   { "Manifesto" = "manifesto.md" },
 ]
 

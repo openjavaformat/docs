@@ -153,4 +153,4 @@ hook that runs the same check.
 
 For the whole 2.x line the output is byte-for-byte the same as the palantir-java-format release
 with the same version number, and the Java packages are unchanged. Migrating means changing the
-coordinates and nothing else.
+coordinates and nothing else: [Migrate](migrate.md) lists every name that changes.
