@@ -44,7 +44,8 @@ open-java-format.
 ## Which formatter version runs
 
 The formatter runs in a process of its own, on the IDE's runtime, so the project SDK can be any
-version.
+version. When a Gradle build runs the formatter as a
+[native binary](gradle.md#choose-how-the-formatter-runs), the IDE runs that binary instead.
 
 A project that applies the [Gradle plugin](gradle.md) takes the formatter version from the build.
 Every other project uses the version bundled with the IDE plugin.
