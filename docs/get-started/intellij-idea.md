@@ -38,7 +38,7 @@ The plugin is off in every project until you turn it on.
 1. Open **Settings** and go to **Other Settings → open-java-format Settings**.
 2. Tick **Enable open-java-format**.
 
-![The open-java-format Settings page with Enable open-java-format ticked](../assets/images/intellij-enable.webp){ width="1000" height="673" loading="lazy" }
+![The open-java-format Settings page with Enable open-java-format ticked](../assets/images/intellij-enable.webp){ width="565" height="455" loading="lazy" }
 
 From then on Reformat Code, ++ctrl+alt+l++ or ++option+cmd+l++ on macOS, formats Java files with
 open-java-format.
