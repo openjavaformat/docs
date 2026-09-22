@@ -46,7 +46,7 @@ of the two settings below, `formatDiff` fails with an `IllegalAccessError` that 
     ```
 
     Gradle then runs the formatter as a native binary, outside its own JVM. This works on Linux
-    with glibc and on macOS.
+    with glibc, on macOS and on Windows on x86-64.
 
 === "On the Gradle JVM"
 
@@ -58,8 +58,8 @@ of the two settings below, `formatDiff` fails with an `IllegalAccessError` that 
       --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
     ```
 
-    This works on every platform, Windows included. If the file already sets
-    `org.gradle.jvmargs`, add the flags to that line instead of writing a second one.
+    This works on every platform. If the file already sets `org.gradle.jvmargs`, add the flags to
+    that line instead of writing a second one.
 
 A build that also applies Spotless needs the JVM flags: the Spotless step runs on the Gradle JVM
 even when the native binary is switched on. See [Spotless](spotless.md).

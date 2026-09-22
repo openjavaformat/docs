@@ -116,7 +116,7 @@ openjavaformat.native.formatter=true
 
 The plugin adds the `formatDiff` task, which formats only the lines you changed in git, and it keeps
 IntelliJ IDEA on the formatter version of the build. The property makes Gradle run the formatter as
-a native binary on Linux and macOS. For Windows and for multi-project builds see
+a native binary on Linux, macOS and Windows. For other platforms and for multi-project builds see
 [Gradle plugin](get-started/gradle.md).
 
 ### On the command line
