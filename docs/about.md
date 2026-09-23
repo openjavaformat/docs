@@ -12,16 +12,16 @@ project exists is in the [manifesto](manifesto.md).
 | [Maven Central](https://central.sonatype.com/namespace/dev.openjavaformat) | `dev.openjavaformat:open-java-format`, with `-spi`, `-native` and `-jdk-bootstrap` |
 | [Gradle Plugin Portal](https://plugins.gradle.org/plugin/dev.openjavaformat.java-format) | `dev.openjavaformat.java-format` |
 | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34359-open-java-format) | the IntelliJ IDEA plugin |
-| [GitHub Releases](https://github.com/openjavaformat/open-java-format/releases/latest) | native binaries, the runnable jar, the IntelliJ IDEA and Eclipse plugins |
+| [GitHub Releases](https://github.com/openjavaformat/open-java-format/releases/latest) | native binaries, the runnable jar, the Gradle, IntelliJ IDEA and Eclipse plugins |
 
-The Maven Central artifacts and the files of a GitHub release are built by the
+The Maven Central artifacts, the Gradle plugins and the files of a GitHub release are built by the
 [release workflow](https://github.com/openjavaformat/open-java-format/blob/main/.github/workflows/release.yml)
 from the tag of the version.
 
 ## Verify a download
 
 Each file of a GitHub release has a `.asc` signature next to it, and so does each artifact on Maven
-Central. They are made with the project's release key:
+Central and the Gradle Plugin Portal. They are made with the project's release key:
 
 ``` text
 13A6 BDF2 DAA9 8D3D 573B  33EA 1004 81FD AEE9 4DE9
