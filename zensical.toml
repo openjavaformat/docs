@@ -105,7 +105,7 @@ toggle.name = "Switch to system preference"
 # plugin puts it in before the Markdown is rendered, so it lands in code blocks too. The key is not
 # extra.version: the theme reads that one as the switch for a version selector.
 [project.extra]
-ojf_version = "2.98.0.2"
+ojf_version = "2.98.0.3"
 
 # Renders every page as a Jinja template, for {{ ojf_version }}. A misspelt variable or a stray {{
 # fails the build instead of leaving a gap or the raw text on the site.
