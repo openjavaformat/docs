@@ -35,9 +35,8 @@ The formatter itself is downloaded from Maven Central, in the same version as th
 
 ## Choose how the formatter runs
 
-The formatter reads javac's internal classes, which a plain Gradle JVM does not open up. Without one
-of the two settings below, `formatDiff` fails with an `IllegalAccessError` that mentions
-`module jdk.compiler does not export com.sun.tools.javac.parser`.
+The formatter reads javac's internal classes, which a plain Gradle JVM does not open up. Pick one of
+the two settings below; without either, `formatDiff` stops before the first file and names them.
 
 === "Native binary"
 
