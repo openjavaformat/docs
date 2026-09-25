@@ -6,23 +6,35 @@ open-java-format {{ ojf_version }} formats with the code of palantir-java-format
 and built in the open. The output is the same except for the fixes below. Anywhere else, switching
 produces no formatting diff and needs no reformatting commit.
 
-- Since 2.98.0.3: a long string is no longer split after an escaped backslash followed by `n`, as if
-  that were a line break, and imports with comments between them are formatted rather than rejected.
-- Since 2.98.0.4: a cast to a parameterized type at the end of a call chain is no longer split
-  inside its type, `(PrivilegedAction<` on one line and `String>)` on the next, when the chain is
-  inlined but the type does not fit behind it. The call breaks its arguments one per line instead.
-- Since 2.98.0.4: a switch expression that initializes a variable or a field starts on the line of
-  the declaration, `int x = switch (y) {`, with its cases eight columns further left, the shape a
-  plain assignment already had. This is the one change of palantir-java-format 2.99.0, brought over.
-- Since 2.98.0.4: a comment that opens with `/***`, such as a banner, no longer counts as javadoc,
-  so a blank line between it and the declaration after it stays, as after any other block comment.
+- Since 2.98.0.3 ([#32](https://github.com/openjavaformat/open-java-format/issues/32),
+  [#44](https://github.com/openjavaformat/open-java-format/pull/44)): a long string is no longer
+  split after an escaped backslash followed by `n`, as if that were a line break, and imports with
+  comments between them are formatted rather than rejected.
+- Since 2.98.0.4 ([#78](https://github.com/openjavaformat/open-java-format/pull/78)): a cast to a
+  parameterized type at the end of a call chain is no longer split inside its type,
+  `(PrivilegedAction<` on one line and `String>)` on the next, when the chain is inlined but the
+  type does not fit behind it. The call breaks its arguments one per line instead.
+- Since 2.98.0.4 ([#76](https://github.com/openjavaformat/open-java-format/pull/76)): a switch
+  expression that initializes a variable or a field starts on the line of the declaration,
+  `int x = switch (y) {`, with its cases eight columns further left, the shape a plain assignment
+  already had. This is the one change of palantir-java-format 2.99.0, brought over.
+- Since 2.98.0.4 ([#74](https://github.com/openjavaformat/open-java-format/pull/74)): a comment that
+  opens with `/***`, such as a banner, no longer counts as javadoc, so a blank line between it and
+  the declaration after it stays, as after any other block comment.
+- Since 2.98.0.4 ([#70](https://github.com/openjavaformat/open-java-format/pull/70)): a one-letter
+  class name such as Android's `R` no longer counts as a constant, so a dotted name through it that
+  does not fit, such as `com.example.R.string.app_name`, keeps `com.example.R.string` together
+  instead of breaking at every dot.
+- Since 2.98.0.4 ([#73](https://github.com/openjavaformat/open-java-format/pull/73)): tabs at the
+  end of a line in a comment are dropped, as trailing spaces already were.
 
 Checked on 341 source files, about 24,000 lines: palantir-java-format 2.98.0 and open-java-format
 2.98.0.2 give byte-identical output. On the JDK 21 sources, 2.98.0.3 reformats 5 of the files that
 2.98.0.2 leaves unchanged when run again, all because of the string fix. In 2.98.0.4 the cast fix
 changes one statement, in `sun.rmi.transport.tcp.TCPTransport`; the switch change moves 57
 declarations in 51 files; and the banner change keeps 70 blank lines in 43 files, every one of them
-present in the source.
+present in the source. The class name and tab fixes change nothing there: no dotted name in the JDK
+runs through a one-letter class, and no comment ends in a tab.
 
 The Java packages are unchanged as well. Only the names in your build and your scripts change.
 
