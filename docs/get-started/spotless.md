@@ -65,7 +65,7 @@ org.gradle.jvmargs=--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAME
 
 The Maven plugin of Spotless has no step for open-java-format. Its `palantirJavaFormat` step always
 downloads `com.palantir.javaformat:palantir-java-format`, and it cannot be pointed at another
-artifact.
+artifact. Until that changes, a Maven build formats with our [Maven plugin](maven.md).
 
 The pull request [diffplug/spotless#3084](https://github.com/diffplug/spotless/pull/3084) adds an
 `openJavaFormat` step to both Spotless plugins, for Gradle and for Maven:

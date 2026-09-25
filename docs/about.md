@@ -9,14 +9,15 @@ project exists is in the [manifesto](manifesto.md).
 
 | Where | What |
 | --- | --- |
-| [Maven Central](https://central.sonatype.com/namespace/dev.openjavaformat) | `dev.openjavaformat:open-java-format`, with `-spi`, `-native` and `-jdk-bootstrap` |
+| [Maven Central](https://central.sonatype.com/namespace/dev.openjavaformat) | `dev.openjavaformat:open-java-format`, with `-spi`, `-native` and `-jdk-bootstrap`, and the Maven plugin `dev.openjavaformat:fmt-maven-plugin` |
 | [Gradle Plugin Portal](https://plugins.gradle.org/plugin/dev.openjavaformat.java-format) | `dev.openjavaformat.java-format` |
 | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34359-open-java-format) | the IntelliJ IDEA plugin |
 | [GitHub Releases](https://github.com/openjavaformat/open-java-format/releases/latest) | native binaries, the runnable jar, the Gradle, IntelliJ IDEA and Eclipse plugins |
 
 The Maven Central artifacts, the Gradle plugins and the files of a GitHub release are built by the
 [release workflow](https://github.com/openjavaformat/open-java-format/blob/main/.github/workflows/release.yml)
-from the tag of the version.
+from the tag of the version. The Maven plugin has a repository and a release workflow of its own,
+[openjavaformat/fmt-maven-plugin](https://github.com/openjavaformat/fmt-maven-plugin).
 
 ## Verify a download
 

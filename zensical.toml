@@ -20,6 +20,7 @@ nav = [
     "get-started/index.md",
     { "Gradle plugin" = "get-started/gradle.md" },
     { "Spotless" = "get-started/spotless.md" },
+    { "Maven plugin" = "get-started/maven.md" },
     { "Command line" = "get-started/command-line.md" },
     { "IntelliJ IDEA" = "get-started/intellij-idea.md" },
     { "Eclipse" = "get-started/eclipse.md" },
@@ -106,6 +107,9 @@ toggle.name = "Switch to system preference"
 # extra.version: the theme reads that one as the switch for a version selector.
 [project.extra]
 ojf_version = "2.98.0.4"
+# The Maven plugin is released from its own repository, openjavaformat/fmt-maven-plugin, with version
+# numbers of its own. Bump it on each release of the plugin.
+maven_plugin_version = "2.27.0.1"
 
 # Renders every page as a Jinja template, for {{ ojf_version }}. A misspelt variable or a stray {{
 # fails the build instead of leaving a gap or the raw text on the site.

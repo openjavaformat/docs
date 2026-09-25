@@ -96,7 +96,8 @@ In a `pom.xml` it is the same change of `groupId`, `artifactId` and `version`.
 ### Spotless
 
 With Gradle, remove `palantirJavaFormat()` from the `spotless` block and apply our plugin, which adds
-its own step. Maven has no way yet. [Spotless](get-started/spotless.md) has both.
+its own step. With Maven, Spotless has no step for open-java-format yet: remove `palantirJavaFormat`
+and add our [Maven plugin](get-started/maven.md). [Spotless](get-started/spotless.md) has both.
 
 ### IntelliJ IDEA
 

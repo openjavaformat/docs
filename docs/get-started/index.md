@@ -6,7 +6,8 @@ the same formatter, so they all produce the same files. Set up the ones your pro
 !!! info "Requirements"
 
     The current version is **{{ ojf_version }}**. Everything except the native binaries needs Java 21 or
-    later, and the Gradle plugin needs Gradle 9.
+    later, and the Gradle plugin needs Gradle 9. The Maven plugin has version numbers of its own; the
+    current one is **{{ maven_plugin_version }}**.
 
 <div class="grid cards" markdown>
 
@@ -22,6 +23,12 @@ the same formatter, so they all produce the same files. Set up the ones your pro
     ---
 
     Works with Gradle through our plugin. Maven waits for a pull request in Spotless.
+
+-   :simple-apachemaven:{ .lg .middle } __[Maven plugin](maven.md)__
+
+    ---
+
+    Formats the sources in every build, or fails the build in CI when they are not formatted.
 
 -   :lucide-terminal:{ .lg .middle } __[Command line](command-line.md)__
 
