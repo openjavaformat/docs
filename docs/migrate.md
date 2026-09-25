@@ -11,11 +11,19 @@ produces no formatting diff and needs no reformatting commit.
 - Not yet in a release: a cast to a parameterized type at the end of a call chain is no longer split
   inside its type, `(PrivilegedAction<` on one line and `String>)` on the next, when the chain is
   inlined but the type does not fit behind it. The call breaks its arguments one per line instead.
+- Not yet in a release: a switch expression that initializes a variable or a field starts on the line
+  of the declaration, `int x = switch (y) {`, with its cases eight columns further left, the shape a
+  plain assignment already had. This is the one change of palantir-java-format 2.99.0, brought over.
+- Not yet in a release: a comment that opens with `/***`, such as a banner, no longer counts as
+  javadoc, so a blank line between it and the declaration after it stays, as after any other block
+  comment.
 
 Checked on 341 source files, about 24,000 lines: palantir-java-format 2.98.0 and open-java-format
 2.98.0.2 give byte-identical output. On the JDK 21 sources, 2.98.0.3 reformats 5 of the files that
-2.98.0.2 leaves unchanged when run again, all because of the string fix; the cast fix changes one
-statement, in `sun.rmi.transport.tcp.TCPTransport`.
+2.98.0.2 leaves unchanged when run again, all because of the string fix. Of the three unreleased
+changes, the cast fix changes one statement, in `sun.rmi.transport.tcp.TCPTransport`; the switch
+change moves 57 declarations in 51 files; and the banner change keeps 70 blank lines in 43 files,
+every one of them present in the source.
 
 The Java packages are unchanged as well. Only the names in your build and your scripts change.
 
