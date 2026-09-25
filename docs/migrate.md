@@ -3,14 +3,19 @@
 ## From palantir-java-format
 
 open-java-format {{ ojf_version }} formats with the code of palantir-java-format 2.98.0, under new names
-and built in the open. The output is the same except for two fixes. A long string is no longer split
-after an escaped backslash followed by `n`, as if that were a line break. Imports with comments
-between them are formatted rather than rejected. Anywhere else, switching produces no formatting diff
-and needs no reformatting commit.
+and built in the open. The output is the same except for the fixes below. Anywhere else, switching
+produces no formatting diff and needs no reformatting commit.
+
+- Since 2.98.0.3: a long string is no longer split after an escaped backslash followed by `n`, as if
+  that were a line break, and imports with comments between them are formatted rather than rejected.
+- Not yet in a release: a cast to a parameterized type at the end of a call chain is no longer split
+  inside its type, `(PrivilegedAction<` on one line and `String>)` on the next, when the chain is
+  inlined but the type does not fit behind it. The call breaks its arguments one per line instead.
 
 Checked on 341 source files, about 24,000 lines: palantir-java-format 2.98.0 and open-java-format
 2.98.0.2 give byte-identical output. On the JDK 21 sources, 2.98.0.3 reformats 5 of the files that
-2.98.0.2 leaves unchanged when run again, all because of the first fix.
+2.98.0.2 leaves unchanged when run again, all because of the string fix; the cast fix changes one
+statement, in `sun.rmi.transport.tcp.TCPTransport`.
 
 The Java packages are unchanged as well. Only the names in your build and your scripts change.
 
