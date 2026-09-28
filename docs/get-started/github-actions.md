@@ -55,8 +55,8 @@ root. Every line that is not empty and not a comment is a git pathspec, and a Ja
 one is skipped.
 
 ``` gitignore title=".open-java-format-exclude"
-# Standalone jbang scripts: the formatter would rewrite their //DEPS directives
-samples/**
+# Code copied from another project, kept as it came
+third_party/**
 
 # Generated sources
 **/build/generated/**
