@@ -27,14 +27,21 @@ produces no formatting diff and needs no reformatting commit.
   instead of breaking at every dot.
 - Since 2.98.0.4 ([#73](https://github.com/openjavaformat/open-java-format/pull/73)): tabs at the
   end of a line in a comment are dropped, as trailing spaces already were.
+- Since 2.98.0.5 ([#91](https://github.com/openjavaformat/open-java-format/pull/91)): a bug that
+  broke JBang scripts is fixed. The formatter handled their header wrongly: it put a space after the
+  slashes, so `//DEPS` became `// DEPS`, which JBang does not read, and `///usr/bin/env jbang` on the
+  first line became `/// usr/bin/env jbang`, which a shell cannot run. These lines now stay as
+  written, see [JBang](library-rules/jbang.md). A script that was formatted before keeps its spaces:
+  remove them by hand once.
 
 Checked on 341 source files, about 24,000 lines: palantir-java-format 2.98.0 and open-java-format
 2.98.0.2 give byte-identical output. On the JDK 21 sources, 2.98.0.3 reformats 5 of the files that
 2.98.0.2 leaves unchanged when run again, all because of the string fix. In 2.98.0.4 the cast fix
 changes one statement, in `sun.rmi.transport.tcp.TCPTransport`; the switch change moves 57
 declarations in 51 files; and the banner change keeps 70 blank lines in 43 files, every one of them
-present in the source. The class name and tab fixes change nothing there: no dotted name in the JDK
-runs through a one-letter class, and no comment ends in a tab.
+present in the source. The class name, tab and JBang fixes change nothing there: no dotted name in
+the JDK runs through a one-letter class, no comment ends in a tab, and no file opens like a JBang
+script.
 
 The Java packages are unchanged as well. Only the names in your build and your scripts change.
 
