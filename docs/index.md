@@ -92,6 +92,33 @@ chain breaks into one call per line.
 
 ## Quick start
 
+### In a Gradle build
+
+=== "Groovy"
+
+    ``` groovy title="build.gradle"
+    plugins {
+        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
+    }
+    ```
+
+=== "Kotlin"
+
+    ``` kotlin title="build.gradle.kts"
+    plugins {
+        id("dev.openjavaformat.java-format") version "{{ ojf_version }}"
+    }
+    ```
+
+``` properties title="gradle.properties"
+openjavaformat.native.formatter=true
+```
+
+The plugin adds the `formatDiff` task, which formats only the lines you changed in git, and it keeps
+IntelliJ IDEA on the formatter version of the build. The property makes Gradle run the formatter as
+a native binary on Linux, macOS and Windows. For other platforms and for multi-project builds see
+[Gradle plugin](get-started/gradle.md).
+
 ### In a Maven build
 
 ``` xml title="pom.xml"
@@ -124,33 +151,6 @@ The `format` goal formats `src/main/java` and `src/test/java` in the `process-so
 build formats the sources before it compiles them. The dependency picks the formatter version, and
 the plugin does not run without it. Maven has to run on Java 21 or later. The `check` goal for CI is
 on the [Maven plugin](get-started/maven.md) page.
-
-### In a Gradle build
-
-=== "Groovy"
-
-    ``` groovy title="build.gradle"
-    plugins {
-        id 'dev.openjavaformat.java-format' version '{{ ojf_version }}'
-    }
-    ```
-
-=== "Kotlin"
-
-    ``` kotlin title="build.gradle.kts"
-    plugins {
-        id("dev.openjavaformat.java-format") version "{{ ojf_version }}"
-    }
-    ```
-
-``` properties title="gradle.properties"
-openjavaformat.native.formatter=true
-```
-
-The plugin adds the `formatDiff` task, which formats only the lines you changed in git, and it keeps
-IntelliJ IDEA on the formatter version of the build. The property makes Gradle run the formatter as
-a native binary on Linux, macOS and Windows. For other platforms and for multi-project builds see
-[Gradle plugin](get-started/gradle.md).
 
 ### On the command line
 
