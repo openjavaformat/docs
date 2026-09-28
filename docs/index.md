@@ -92,6 +92,39 @@ chain breaks into one call per line.
 
 ## Quick start
 
+### In a Maven build
+
+``` xml title="pom.xml"
+<build>
+    <plugins>
+        <plugin>
+            <groupId>dev.openjavaformat</groupId>
+            <artifactId>fmt-maven-plugin</artifactId>
+            <version>{{ maven_plugin_version }}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>format</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>dev.openjavaformat</groupId>
+                    <artifactId>open-java-format</artifactId>
+                    <version>{{ ojf_version }}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+```
+
+The `format` goal formats `src/main/java` and `src/test/java` in the `process-sources` phase, so the
+build formats the sources before it compiles them. The dependency picks the formatter version, and
+the plugin does not run without it. Maven has to run on Java 21 or later. The `check` goal for CI is
+on the [Maven plugin](get-started/maven.md) page.
+
 ### In a Gradle build
 
 === "Groovy"
