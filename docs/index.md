@@ -188,6 +188,6 @@ hook that reads the same file and runs the same check.
 ## A drop-in for palantir-java-format
 
 The output is the same as palantir-java-format 2.98.0's, except for bug fixes, and the Java packages
-are unchanged. Migrating means changing the coordinates and nothing else: [Migrate](migrate.md) lists
-every name that changes and every fix, and any later change to the output comes with a new minor
-version, see [Versions](about.md#versions).
+are unchanged. Migrating means changing the coordinates and, since 21.0.0, one reformatting run in a
+commit of its own: [Migrate](migrate.md) lists every name that changes and every fix, and any later
+change to the output comes with a new minor version, see [Versions](about.md#versions).
