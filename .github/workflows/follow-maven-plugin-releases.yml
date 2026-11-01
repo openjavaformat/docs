@@ -1,0 +1,62 @@
+name: Follow fmt-maven-plugin releases
+
+# The pages add the Maven plugin with the version that zensical.toml names as maven_plugin_version.
+# Once an hour this compares it with the latest release of openjavaformat/fmt-maven-plugin. When a
+# new release is out, that line is changed, the result is pushed to main, and Documentation is run
+# on it to deploy the site. That run has to be explicit: a push made with the workflow's own token
+# starts no push-triggered workflow. follow-releases.yml does the same for ojf_version half an hour
+# apart, so that the two never push to main at once.
+
+on:
+  schedule:
+    - cron: '47 * * * *' # half an hour after follow-releases.yml, and not on the hour
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  bump:
+    name: Bump to the latest release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push to main
+      actions: write # run Documentation
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Bump when a new release is out
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          current=$(sed -n 's/^maven_plugin_version = "\(.*\)"$/\1/p' zensical.toml)
+          release=$(gh release view --repo openjavaformat/fmt-maven-plugin --json tagName,publishedAt)
+          latest=$(jq -r .tagName <<< "$release")
+          published=$(jq -r '.publishedAt[:10]' <<< "$release")
+          # The latest release is the one published last, and a fix for an older line can come out
+          # after a newer line started: only a higher version number is a bump.
+          newer=$(printf '%s\n' "$current" "$latest" | sort -V | tail -n 1)
+          if [ "$latest" = "$current" ] || [ "$newer" != "$latest" ]; then
+            echo "Already on $current; the latest release is $latest."
+            exit 0
+          fi
+
+          # The dots are escaped so that sed takes them literally.
+          sed -i "s/^maven_plugin_version = \"${current//./\\.}\"$/maven_plugin_version = \"$latest\"/" zensical.toml
+          git diff
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit --all --quiet --file - <<COMMIT
+          Install fmt-maven-plugin $latest
+
+          The pages install fmt-maven-plugin $latest, which
+          openjavaformat/fmt-maven-plugin released on $published. Made by the
+          "$GITHUB_WORKFLOW" workflow:
+          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          COMMIT
+          gh auth setup-git
+          git push origin HEAD:main
+          gh workflow run docs.yml --ref main
