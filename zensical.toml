@@ -110,7 +110,7 @@ toggle.name = "Switch to system preference"
 ojf_version = "21.0.1"
 # The Maven plugin is released from its own repository, openjavaformat/fmt-maven-plugin, with version
 # numbers of its own. follow-maven-plugin-releases.yml bumps it on each release of the plugin.
-maven_plugin_version = "2.27.0.1"
+maven_plugin_version = "2.27.0.2"
 
 # Renders every page as a Jinja template, for {{ ojf_version }}. A misspelt variable or a stray {{
 # fails the build instead of leaving a gap or the raw text on the site.
