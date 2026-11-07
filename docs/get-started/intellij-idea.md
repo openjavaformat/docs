@@ -35,7 +35,7 @@ A version that is not on the Marketplace yet can be installed from a release.
 
 The plugin is off in every project until you turn it on.
 
-1. Open **Settings** and go to **Other Settings → open-java-format Settings**.
+1. Open **Settings** and go to **Tools → open-java-format Settings**.
 2. Tick **Enable open-java-format**.
 
 ![The open-java-format Settings page with Enable open-java-format ticked](../assets/images/intellij-enable.webp){ width="565" height="455" loading="lazy" }
@@ -58,8 +58,7 @@ Limiting it to Java keeps other files out: the IDE would reformat those with its
 ## Which formatter version runs
 
 A project that applies the [Gradle plugin](gradle.md) takes the formatter version from the build.
-Every other project uses the version bundled with the IDE plugin, which the settings page shows as
-`(bundled)` under **Implementation version**, as in the screenshot above.
+Every other project uses the version bundled with the IDE plugin.
 
 By default the formatter runs in a process of its own, on the IDE's runtime, so the project SDK can
 be any version.
@@ -72,15 +71,17 @@ one: on an Apple silicon Mac a file takes about 40 ms instead of 430 ms.
 
 It is a setting of the IDE and works in any project, whether Maven, Gradle or neither builds it.
 
-1. Open **Settings** and go to **Other Settings → open-java-format Settings**.
-2. Tick **Use native binary**.
+1. Open **Settings** and go to **Tools → open-java-format Settings**.
+2. Tick **Use native binary**, which shows while **Enable open-java-format** is ticked.
 3. Click **Download** next to **No embedded version.** The IDE downloads the binary of the plugin's
    version for your platform from Maven Central, checks it against its SHA-256 checksum and keeps
    it for every project. The line then reads **Use embedded version** and the version.
-4. Click **OK**.
+4. Click **OK**. Until there is a binary to run, OK says so and keeps the page open.
 
-**Formatter type** at the bottom of the page names what runs, and `idea.log` has a line starting
-with `open-java-format: using` each time the plugin starts a formatter.
+**Active formatter** at the bottom of the page names what runs once you click OK, and follows the
+page as you change it: the Java-based formatter, the binary's path, or the version that still
+needs downloading. `idea.log` has a line starting with `open-java-format: using` each time the
+plugin starts a formatter.
 
 !!! note "Projects that set `openjavaformat.native.formatter`"
 
@@ -96,9 +97,10 @@ go back to the embedded binary.
 ### After an update of the plugin
 
 The binary of the previous version keeps formatting. When a project opens, a notification says
-that a newer one is available, with **Download** and **Ignore**. Ignore holds until the plugin's
-next version, and the settings page still offers **Update to** next to the version in use. Once
-the newer binary is in, the old one is deleted.
+that a newer one is available, with **Download** and **Ignore**; Ignore holds until the plugin's
+next version. **Update to latest**, next to the version on the settings page, does the same at any
+time: it downloads the plugin's version, and does nothing when that is the one in use. Once the
+newer binary is in, the old one is deleted.
 
 ### Platforms
 
