@@ -115,6 +115,22 @@ is resolved by the root project, so the root project needs the repository too.
     }
     ```
 
+## Configuration cache
+
+The plugin works with Gradle's configuration cache: `formatDiff`, the [Spotless](spotless.md) step
+and the IntelliJ IDEA tasks below run from a cached configuration, and the next build reuses it.
+Turn the cache on as for any build:
+
+``` properties title="gradle.properties"
+org.gradle.configuration-cache=true
+```
+
+Up to 21.0.1, `formatDiff` and the Spotless step fail with the cache on
+([#193](https://github.com/openjavaformat/open-java-format/issues/193)).
+
+Gradle's own `idea` task does not support the cache, and Gradle turns it off for a build that runs
+the task.
+
 ## IntelliJ IDEA
 
 When the project is opened in IntelliJ IDEA, the plugin writes the formatter settings into `.idea`,
