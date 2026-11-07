@@ -11,12 +11,18 @@ _.python.venv = { path = ".venv", create = true }
 description = "Install the Zensical version pinned in requirements.txt into .venv"
 run = "pip install --quiet --disable-pip-version-check -r requirements.txt"
 
+# The playground's formatter, the WebAssembly module of ojf_version, into docs/playground/. OJF_WASM_ZIP=<zip>
+# takes a module built locally instead: ./gradlew -Pwasm=true :open-java-format-wasm:wasmZip in the formatter.
+[tasks.playground]
+description = "Put the playground's formatter into docs/playground/, from the release or from $OJF_WASM_ZIP"
+run = "./scripts/fetch-playground.sh"
+
 [tasks.serve]
 description = "Preview the site on http://localhost:8000 with live reload"
-depends = ["install"]
+depends = ["install", "playground"]
 run = "zensical serve"
 
 [tasks.build]
 description = "Build the site into site/ the same way CI does: clean and strict"
-depends = ["install"]
+depends = ["install", "playground"]
 run = "zensical build --clean --strict"

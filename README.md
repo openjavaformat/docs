@@ -35,6 +35,21 @@ zensical serve
 The preview runs on <http://localhost:8000> and reloads on save. `mise run build` runs the same
 clean, strict build as CI.
 
+## The playground
+
+The Playground page formats code in the browser with the formatter compiled to WebAssembly. The module
+is not in this repository: `scripts/fetch-playground.sh` downloads it from the GitHub release that
+`ojf_version` names, checks it against that release's checksums, and unpacks it next to the page.
+`docs.yml` runs it before every build, and `mise run serve` and `mise run build` run it through
+`mise run playground`. A release without the module is a warning, not an error: the page then says
+that the playground comes with the next release.
+
+To try a module built locally, point `OJF_WASM_ZIP` at its zip:
+
+```bash
+OJF_WASM_ZIP=../open-java-format/open-java-format-wasm/build/distributions/open-java-format-wasm-<version>.zip mise run serve
+```
+
 ## Publishing
 
 A push to `main` runs `.github/workflows/docs.yml`, which builds the site and deploys it to GitHub

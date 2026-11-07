@@ -30,6 +30,11 @@ jobs:
       - name: Install Zensical
         run: pip install -r requirements.txt
 
+      # The playground's formatter: the WebAssembly module of the release that ojf_version names. A release
+      # without one leaves the page saying that the playground comes with the next release.
+      - name: Fetch the playground's formatter
+        run: ./scripts/fetch-playground.sh
+
       # Strict mode fails the build on a broken link or anchor. That check is what makes a pull
       # request opened from the "Edit this page" button safe to merge from the browser.
       - name: Build the site

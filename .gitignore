@@ -6,3 +6,7 @@
 /.venv/
 
 .DS_Store
+
+# The playground's formatter, which scripts/fetch-playground.sh downloads from the release
+/docs/playground/open-java-format.js
+/docs/playground/open-java-format.js.wasm

@@ -26,6 +26,7 @@ nav = [
     { "Eclipse" = "get-started/eclipse.md" },
     { "GitHub Action and pre-commit" = "get-started/github-actions.md" },
   ] },
+  { "Playground" = "playground/index.md" },
   { "AI agents" = "ai-agents.md" },
   { "Style" = "style.md" },
   { "Library rules" = [
@@ -38,8 +39,10 @@ nav = [
   { "About" = "about.md" },
 ]
 
-# extra_css = ["stylesheets/extra.css"]
-# extra_javascript = ["javascripts/extra.js"]
+# The Playground page's layout and script. The script comes on every page, because the site navigates without
+# reloading, and does nothing where there is no playground; the formatter itself loads on the Playground only.
+extra_css = ["stylesheets/playground.css"]
+extra_javascript = ["javascripts/playground.js"]
 
 [project.theme]
 # variant = "classic"
