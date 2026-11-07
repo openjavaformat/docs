@@ -66,18 +66,42 @@ be any version.
 
 ## Native binary
 
-In a project with the [Gradle plugin](gradle.md), the IDE can run the formatter as the native binary
-that the build uses. It is switched on in the build, not in the IDE:
+Reformat Code starts the formatter as a new process for every file, and the Java-based formatter
+starts a JVM each time, which a whole directory makes you feel. The native binary starts without
+one: on an Apple silicon Mac a file takes about 40 ms instead of 430 ms.
 
-``` properties title="gradle.properties"
-openjavaformat.native.formatter=true
-```
+It is a setting of the IDE and works in any project, whether Maven, Gradle or neither builds it.
 
-After the next Gradle sync in the IDE, the plugin writes the path of the binary into
-`.idea/open-java-format.xml`, and **Formatter type** on the settings page changes from
-**Java-based formatter** to **Native image formatter**. Each reformat starts the formatter as a new
-process, and the native binary starts without a JVM.
+1. Open **Settings** and go to **Other Settings → open-java-format Settings**.
+2. Tick **Use native binary**.
+3. Click **Download** next to **No embedded version.** The IDE downloads the binary of the plugin's
+   version for your platform from Maven Central, checks it against its SHA-256 checksum and keeps
+   it for every project. The line then reads **Use embedded version** and the version.
+4. Click **OK**.
 
-The binary runs on the platforms listed on the
-[Gradle plugin](gradle.md#choose-how-the-formatter-runs) page. Elsewhere the plugin ignores the
-property, and the IDE keeps the Java-based formatter.
+**Formatter type** at the bottom of the page names what runs, and `idea.log` has a line starting
+with `open-java-format: using` each time the plugin starts a formatter.
+
+!!! note "Projects that set `openjavaformat.native.formatter`"
+
+    Up to 21.0.1 that Gradle property also switched the IDE to the native binary. It now applies to
+    the build alone, so tick **Use native binary** once in such a project.
+
+### A binary of your own
+
+To run another binary, such as one from the [command line](command-line.md) page, choose it in
+**Binary** under **Use native binary**. It takes the place of the embedded one; empty the field to
+go back to the embedded binary.
+
+### After an update of the plugin
+
+The binary of the previous version keeps formatting. When a project opens, a notification says
+that a newer one is available, with **Download** and **Ignore**. Ignore holds until the plugin's
+next version, and the settings page still offers **Update to** next to the version in use. Once
+the newer binary is in, the old one is deleted.
+
+### Platforms
+
+The binary is published for Linux with glibc on x86-64 and AArch64, macOS on Apple silicon and
+Intel, and Windows on x86-64. Anywhere else, such as Windows on ARM or Alpine, the settings page
+says there is none and the Java-based formatter runs, unless you choose a binary of your own.
