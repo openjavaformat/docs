@@ -1,6 +1,22 @@
 /* The Playground page, docs/playground/index.md: the code and the result side by side, stacked on a narrow screen.
    Colours and fonts are the theme's, so both palettes work. */
 
+/* The Playground tab in the header stands out on every page: white on the theme's blue, like the Format button.
+   Its href is relative, ./playground/ or ../playground/, so the selector matches the end. */
+.md-tabs__link[href$="playground/"] {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.2rem;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  opacity: 1;
+}
+
+.md-tabs__link[href$="playground/"]:is(:hover, :focus) {
+  background-color: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+}
+
 .ojf-playground {
   display: grid;
   grid-template-columns: 1fr;
