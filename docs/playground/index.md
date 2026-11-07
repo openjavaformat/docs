@@ -82,3 +82,8 @@ The formatter did not load. Reload the page to try again, or use the
 </div>
 
 </div>
+
+Thank you to Denis Pavlyuchenko ([@pavlyuchenko_denis](https://t.me/pavlyuchenko_denis) on Telegram),
+who suggested a playground that runs in the browser, and to [cobr123](https://github.com/cobr123), whose
+[WebAssembly build](https://github.com/cobr123/open-java-format-wasm-demo) of the formatter this one
+started from.
