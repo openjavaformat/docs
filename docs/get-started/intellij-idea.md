@@ -98,9 +98,9 @@ go back to the embedded binary.
 
 The binary of the previous version keeps formatting. When a project opens, a notification says
 that a newer one is available, with **Download** and **Ignore**; Ignore holds until the plugin's
-next version. **Update to latest**, next to the version on the settings page, does the same at any
-time: it downloads the plugin's version, and does nothing when that is the one in use. Once the
-newer binary is in, the old one is deleted.
+next version. The settings page offers the same at any time: while the binary is of another version
+than the plugin, **Update to** and the plugin's version stand next to it. Once the newer binary is
+in, the old one is deleted.
 
 ### Platforms
 
