@@ -1,0 +1,121 @@
+/* The Playground page, docs/playground/index.md: the code and the result side by side, stacked on a narrow screen.
+   Colours and fonts are the theme's, so both palettes work. */
+
+/* The Playground tab in the header stands out on every page: white on the theme's blue, like the Format button.
+   Its href is relative, ./playground/ or ../playground/, so the selector matches the end. */
+.md-tabs__link[href$="playground/"] {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.2rem;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  opacity: 1;
+}
+
+.md-tabs__link[href$="playground/"]:is(:hover, :focus) {
+  background-color: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+}
+
+.ojf-playground {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* The theme's own breakpoint for a wide screen. */
+@media screen and (min-width: 60em) {
+  .ojf-playground {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ojf-playground__pane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ojf-playground__pane label {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.ojf-playground textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 45vh;
+  min-height: 16rem;
+  padding: 0.8em 1.2em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.1rem;
+  background-color: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  font-family: var(--md-code-font-family);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  tab-size: 4;
+  white-space: pre;
+  overflow: auto;
+  resize: none;
+}
+
+/* Side by side, the panes can take most of the window; stacked, two of them have to fit. */
+@media screen and (min-width: 60em) {
+  .ojf-playground textarea {
+    height: min(70vh, 40rem);
+  }
+}
+
+.ojf-playground textarea:focus {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: -1px;
+}
+
+.ojf-playground .ojf-playground__output--error {
+  color: var(--md-typeset-del-color, #d32f2f);
+}
+
+.ojf-playground__copy {
+  position: absolute;
+  top: 2.2rem;
+  right: 0.6rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.1rem;
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.ojf-playground__bar {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+}
+
+.ojf-playground__bar .md-button {
+  margin: 0;
+}
+
+.ojf-playground__bar .md-button:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.ojf-playground__keys {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+}
+
+.ojf-playground__status {
+  flex: 1 1 20rem;
+}
+
+.ojf-playground__status > * {
+  margin: 0;
+}
