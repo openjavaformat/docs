@@ -39,8 +39,8 @@ that line.
     ```
 
 The step runs the formatter inside the Gradle JVM, so it needs the `--add-exports` flags. The native
-formatter property from the [Gradle plugin](gradle.md) page does not help here: on Java 21 and
-later the Spotless step does not use it.
+formatter property from the [Gradle plugin](gradle.md) page does not help here: the Spotless step
+always runs on the Gradle JVM.
 
 ``` properties title="gradle.properties"
 org.gradle.jvmargs=--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
@@ -55,7 +55,10 @@ org.gradle.jvmargs=--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAME
 ./gradlew spotlessCheck    # fail when a file is not formatted
 ```
 
-!!! warning "An error that stays after the fix"
+Without the flags `spotlessJava` fails and names them. The step works with Gradle's
+[configuration cache and build cache](gradle.md#build-cache), and in parallel builds.
+
+!!! warning "Up to 21.0.1: an error that stays after the fix"
 
     Without the flags the step fails with `NoClassDefFoundError: Could not initialize class
     com.palantir.javaformat.java.ImportOrderer`. Spotless remembers that result, so after adding
