@@ -86,7 +86,7 @@ The Java packages are unchanged as well. Only the names in your build and your s
 | Gradle plugin | `com.palantir.java-format` | `dev.openjavaformat.java-format` |
 | Gradle property | `palantir.native.formatter` | `openjavaformat.native.formatter` |
 | Command-line style flag | `--palantir` | none: there is one style |
-| Style in the API | `PALANTIR` | `OJF` |
+| Style in the API | `PALANTIR` | `OJF`, with `PALANTIR` as its deprecated alias |
 | IntelliJ plugin | `palantir-java-format` | `open-java-format` |
 | Java packages | `com.palantir.javaformat.*` | the same |
 
@@ -128,6 +128,11 @@ Change the coordinates. The imports stay as they are, because the packages did n
 ```
 
 In a `pom.xml` it is the same change of `groupId`, `artifactId` and `version`.
+
+Code that names `Style.PALANTIR` keeps working: it is a deprecated alias of `Style.OJF` and formats
+the same, and `Style.valueOf("PALANTIR")` finds it too. Up to 21.0.1 there is no `PALANTIR`: such
+code does not compile, and a jar built against palantir-java-format fails with `NoSuchFieldError`.
+Change it to `OJF` there.
 
 ### Spotless
 
