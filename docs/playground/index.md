@@ -8,7 +8,7 @@ hide:
 
 # Playground
 
-Paste Java code on the left and press **Format**. The formatter runs in your browser, compiled to
+Paste Java code into the upper box and press **Format**. The formatter runs in your browser, compiled to
 WebAssembly from the same release that [the other pages](../get-started/index.md) install: the code is
 not sent anywhere, and the result is what the command line would write.
 
@@ -39,12 +39,6 @@ class Example {
     }
 }
 </textarea>
-</div>
-
-<div class="ojf-playground__pane">
-<label for="ojf-output">open-java-format {{ ojf_version }}</label>
-<textarea id="ojf-output" spellcheck="false" wrap="off" readonly></textarea>
-<button id="ojf-copy" class="ojf-playground__copy" type="button" hidden>Copy</button>
 </div>
 
 <div class="ojf-playground__bar" markdown>
@@ -79,6 +73,12 @@ The formatter did not load. Reload the page to try again, or use the
 
 </div>
 
+</div>
+
+<div class="ojf-playground__pane">
+<label for="ojf-output">open-java-format {{ ojf_version }}</label>
+<textarea id="ojf-output" spellcheck="false" wrap="off" readonly></textarea>
+<button id="ojf-copy" class="ojf-playground__copy" type="button" hidden>Copy</button>
 </div>
 
 </div>

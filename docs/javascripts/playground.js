@@ -1,4 +1,4 @@
-// The Playground page, docs/playground/index.md: formats the code on the left into the pane on the right, in the
+// The Playground page, docs/playground/index.md: formats the code of the upper box into the lower one, in the
 // browser. The formatter is a WebAssembly module, open-java-format.js and open-java-format.js.wasm, which the build
 // puts next to the page; it is the one the release named by ojf_version carries.
 //
