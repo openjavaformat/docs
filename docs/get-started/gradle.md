@@ -31,7 +31,9 @@ formatter version as the build. It needs Gradle 9 and a Gradle daemon running on
     }
     ```
 
-The formatter itself is downloaded from Maven Central, in the same version as the plugin.
+The formatter comes inside the plugin, in the plugin's own version: the build declares nothing for it
+and needs no repository for it. The repository above is for the build's own dependencies, and for the
+native binary below.
 
 ## Choose how the formatter runs
 
@@ -45,7 +47,10 @@ the two settings below; without either, `formatDiff` stops before the first file
     ```
 
     Gradle then runs the formatter as a native binary, outside its own JVM. This works on Linux
-    with glibc, on macOS and on Windows on x86-64.
+    with glibc, on macOS and on Windows on x86-64. The binary, some 60 MB, is
+    `dev.openjavaformat:open-java-format-native` from Maven Central: each project that formats
+    resolves it through its own repositories, `mavenCentral()` or a mirror of it, and runs a copy
+    kept in `~/.gradle/open-java-format-caches`.
 
 === "On the Gradle JVM"
 
@@ -74,8 +79,9 @@ With a clean working tree it has nothing to do.
 
 ## Multi-project builds
 
-Declare the plugin once in the root project and apply it wherever there is Java code. The formatter
-is resolved by the root project, so the root project needs the repository too.
+Declare the plugin once in the root project and apply it wherever there is Java code. Each project
+resolves what it needs through its own repositories, so the root project needs none; a parallel
+build (`--parallel`) works too.
 
 === "Groovy"
 
@@ -84,15 +90,13 @@ is resolved by the root project, so the root project needs the repository too.
         id 'dev.openjavaformat.java-format' version '{{ ojf_version }}' apply false
     }
 
-    allprojects {
-        repositories {
-            mavenCentral()
-        }
-    }
-
     subprojects {
         apply plugin: 'java'
         apply plugin: 'dev.openjavaformat.java-format'
+
+        repositories {
+            mavenCentral()
+        }
     }
     ```
 
@@ -103,15 +107,13 @@ is resolved by the root project, so the root project needs the repository too.
         id("dev.openjavaformat.java-format") version "{{ ojf_version }}" apply false
     }
 
-    allprojects {
-        repositories {
-            mavenCentral()
-        }
-    }
-
     subprojects {
         apply(plugin = "java")
         apply(plugin = "dev.openjavaformat.java-format")
+
+        repositories {
+            mavenCentral()
+        }
     }
     ```
 
@@ -130,6 +132,40 @@ Up to 21.0.1, `formatDiff` and the Spotless step fail with the cache on
 
 Gradle's own `idea` task does not support the cache, and Gradle turns it off for a build that runs
 the task.
+
+## Build cache
+
+The [Spotless](spotless.md) task `spotlessJava` is cacheable, and the formatter is part of its cache
+key: another formatter version runs the task again, while a copy of the project in another directory,
+or on another machine, takes the result from the cache. A build that cannot run the formatter, for
+want of the `--add-exports` flags above, fails `spotlessJava` and leaves nothing in the cache.
+
+Up to 21.0.1, the key did not change with the formatter version, and a failure of the formatter went
+into the cache as the task's result.
+
+## Another formatter version
+
+The plugin formats with the version that comes inside it. To try another one, declare it in the root
+project. Each project that formats resolves it through its own repositories, and so does the root
+project, for the IntelliJ IDEA settings below:
+
+=== "Groovy"
+
+    ``` groovy title="build.gradle"
+    dependencies {
+        palantirJavaFormat 'dev.openjavaformat:open-java-format:<version>'
+    }
+    ```
+
+=== "Kotlin"
+
+    ``` kotlin title="build.gradle.kts"
+    dependencies {
+        "palantirJavaFormat"("dev.openjavaformat:open-java-format:<version>")
+    }
+    ```
+
+The IntelliJ IDEA settings below then name that version too.
 
 ## IntelliJ IDEA
 
