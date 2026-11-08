@@ -135,4 +135,5 @@ the task.
 
 When the project is opened in IntelliJ IDEA, the plugin writes the formatter settings into `.idea`,
 and the [IDE plugin](intellij-idea.md) then formats with the version the build uses. The IDE plugin
-is installed separately.
+is installed separately. Whether the IDE runs the native binary is a setting of the IDE plugin,
+whatever `openjavaformat.native.formatter` says: see [Native binary](intellij-idea.md#native-binary).
