@@ -39,7 +39,7 @@ The plugin is off in every project until you turn it on.
 1. Open **Settings** and go to **Tools → open-java-format Settings**.
 2. Tick **Enable open-java-format**.
 
-![The open-java-format Settings page with Enable open-java-format ticked and In the IDE process chosen under Run the formatter](../assets/images/intellij-enable.webp){ width="565" height="455" loading="lazy" }
+![The open-java-format Settings page with Enable open-java-format ticked and In the IDE process chosen under Run the formatter](../assets/images/intellij-enable.png){ width="1176" height="667" loading="lazy" }
 
 From then on Reformat Code, ++ctrl+alt+l++ or ++option+cmd+l++ on macOS, formats Java files with
 open-java-format, and Optimize Imports, ++ctrl+alt+o++ or ++ctrl+option+o++ on macOS, fixes their
@@ -52,7 +52,7 @@ imports.
 3. Next to it, choose **Java** in the file list and **Whole file** instead of **Changed lines**.
 4. Tick **Optimize imports**.
 
-![Actions on Save with Reformat code ticked for Java files and the whole file, and Optimize imports ticked](../assets/images/intellij-actions-on-save.webp){ width="1000" height="674" loading="lazy" }
+![Actions on Save with Reformat code ticked for Java files and the whole file, and Optimize imports ticked](../assets/images/intellij-actions-on-save.png){ width="1178" height="662" loading="lazy" }
 
 Limiting it to Java keeps other files out: the IDE would reformat those with its own formatters.
 **Whole file** formats the entire file, which is what the [GitHub Action](github-actions.md) checks.
@@ -67,10 +67,10 @@ commit dialog. Reformat Code alone leaves the imports as they are.
 
 The imports the IDE adds itself, by auto-import, ++alt+enter++ or completion, follow
 open-java-format's layout while the plugin is enabled: one import for each class, never `.*`, and
-the static imports first. The Java code style page says so at the top, with "Settings may be
+the static imports first. The **Editor → Code Style** page says so at the top, with "Settings may be
 overridden by open-java-format", and its **Disable** link switches the plugin off for the project.
 
-![The Java code style page with the note that open-java-format may override its settings](../assets/images/intellij-code-style.webp){ width="1000" height="600" loading="lazy" }
+![The Code Style page with the note that open-java-format may override its settings, and Disable next to it](../assets/images/intellij-code-style.png){ width="1162" height="635" loading="lazy" }
 
 !!! note "Projects with an `.editorconfig`"
 
@@ -101,7 +101,7 @@ which is the default, the project SDK or another JDK the IDE knows. Choose it fo
 syntax is newer than the IDE's Java, with a JDK that parses it. A JDK that cannot run the formatter,
 older than Java 21 for one, is listed in grey.
 
-![The open-java-format Settings page with In a separate JVM chosen and the list of JDKs open](../assets/images/intellij-separate-jvm.webp){ width="565" height="520" loading="lazy" }
+![The open-java-format Settings page with In a separate JVM chosen and the list of JDKs open](../assets/images/intellij-separate-jvm.png){ width="1164" height="617" loading="lazy" }
 
 **Native binary** runs the formatter compiled for your platform, as the next section describes.
 
