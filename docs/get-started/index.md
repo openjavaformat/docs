@@ -1,7 +1,8 @@
 # Get started
 
 open-java-format runs in the build, in the editor, on the command line and in CI. Every route uses
-the same formatter, so they all produce the same files. Set up the ones your project needs.
+the same formatter, so they all produce the same files; the one exception is the
+`palantirJavaFormat` step of [Spotless](spotless.md#maven). Set up the ones your project needs.
 
 !!! info "Requirements"
 
@@ -22,7 +23,8 @@ the same formatter, so they all produce the same files. Set up the ones your pro
 
     ---
 
-    Works with Gradle through our plugin. Maven waits for a pull request in Spotless.
+    Works with Gradle through our plugin, and with Maven through a Spotless step that formats a
+    little differently.
 
 -   :simple-apachemaven:{ .lg .middle } __[Maven plugin](maven.md)__
 

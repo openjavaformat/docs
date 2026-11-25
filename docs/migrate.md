@@ -137,8 +137,9 @@ Change it to `OJF` there.
 ### Spotless
 
 With Gradle, remove `palantirJavaFormat()` from the `spotless` block and apply our plugin, which adds
-its own step. With Maven, Spotless has no step for open-java-format yet: remove `palantirJavaFormat`
-and add our [Maven plugin](get-started/maven.md). [Spotless](get-started/spotless.md) has both.
+its own step. With Maven, point `palantirJavaFormat` at open-java-format with `groupArtifact`, or
+replace it with our [Maven plugin](get-started/maven.md), whose output matches the other routes.
+[Spotless](get-started/spotless.md) has both.
 
 ### IntelliJ IDEA
 

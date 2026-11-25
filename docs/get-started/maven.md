@@ -65,4 +65,5 @@ open-java-format in place of google-java-format. Its options, such as extra sour
 name patterns and skipping a directory, are listed in
 [its README](https://github.com/openjavaformat/fmt-maven-plugin#options). There is nothing to set for
 the formatting itself: imports are always sorted and cleaned up, and long strings are always
-reflowed, as on every other route.
+reflowed, as on every other route except the `palantirJavaFormat` step of
+[Spotless](spotless.md#maven).

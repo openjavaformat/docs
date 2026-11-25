@@ -1,8 +1,8 @@
 # Spotless
 
 With Gradle, [Spotless](https://github.com/diffplug/spotless) formats Java with open-java-format as
-soon as the build applies our plugin. With Maven it cannot yet, because that needs a change in
-Spotless itself.
+soon as the build applies our plugin. With Maven it formats through its own `palantirJavaFormat`
+step, whose output is not quite the same as on the other routes.
 
 ## Gradle
 
@@ -64,20 +64,53 @@ Without the flags `spotlessJava` fails and names them. The step works with Gradl
     com.palantir.javaformat.java.ImportOrderer`. Spotless remembers that result, so after adding
     the flags run `./gradlew spotlessCheck --rerun-tasks` once.
 
+From Spotless 8.12.0, its `palantirJavaFormat()` step can run open-java-format too, with
+`groupArtifact('dev.openjavaformat:open-java-format')` as with [Maven](#maven) below, and with the
+same differences in its output. The step of our plugin has none of them.
+
 ## Maven
 
-The Maven plugin of Spotless has no step for open-java-format. Its `palantirJavaFormat` step always
-downloads `com.palantir.javaformat:palantir-java-format`, and it cannot be pointed at another
-artifact. Until that changes, a Maven build formats with our [Maven plugin](maven.md).
+The `palantirJavaFormat` step of Spotless runs open-java-format when `groupArtifact` names it. The
+option comes with Spotless Maven plugin 3.12.0
+([diffplug/spotless#3179](https://github.com/diffplug/spotless/pull/3179)). The formatter has to be
+21.0.2 or later, because the step asks for the `PALANTIR` style, and Maven has to run on Java 21 or
+later. Unlike the Gradle step, it needs no `--add-exports` flags.
+
+``` xml title="pom.xml"
+<plugin>
+  <groupId>com.diffplug.spotless</groupId>
+  <artifactId>spotless-maven-plugin</artifactId>
+  <version>3.12.0</version>
+  <configuration>
+    <java>
+      <palantirJavaFormat>
+        <groupArtifact>dev.openjavaformat:open-java-format</groupArtifact>
+        <version>{{ ojf_version }}</version>
+      </palantirJavaFormat>
+    </java>
+  </configuration>
+</plugin>
+```
+
+``` sh
+mvn spotless:apply    # format every Java file
+mvn spotless:check    # fail when a file is not formatted
+```
+
+!!! warning "Long strings stay on one line"
+
+    The step runs the formatter through Spotless's own code for palantir-java-format, and that code
+    never calls `StringWrapper`, which splits a string literal that runs past the column limit into
+    pieces joined with `+`. IntelliJ IDEA, the native binary, the command line and our build plugins
+    split it. `spotless:check` accepts a file they formatted, but the checks of the other routes, the
+    [GitHub Action](github-actions.md) among them, fail on a file that Spotless formatted. Where the
+    two have to match, use our [Maven plugin](maven.md) instead.
+
+### A step of its own
 
 The pull request [diffplug/spotless#3084](https://github.com/diffplug/spotless/pull/3084) adds an
-`openJavaFormat` step to both Spotless plugins, for Gradle and for Maven:
-
-``` xml title="pom.xml, with the pull request merged"
-<openJavaFormat>
-  <version>{{ ojf_version }}</version>
-</openJavaFormat>
-```
+`openJavaFormat` step to both Spotless plugins, for Gradle and for Maven, which formats the way every
+other route does.
 
 Ned Twigg, who maintains Spotless, closed it on 16 September 2026. In
 [his comment](https://github.com/diffplug/spotless/pull/3084#issuecomment-5692183566) he called the
