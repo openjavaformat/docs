@@ -15,14 +15,15 @@ project exists is in the [manifesto](manifesto.md).
 | [GitHub Releases](https://github.com/openjavaformat/open-java-format/releases/latest) | native binaries, the runnable jar, the Gradle, IntelliJ IDEA and Eclipse plugins |
 | [Homebrew tap](https://github.com/openjavaformat/homebrew-tap) | `openjavaformat/tap/open-java-format`, the native binary for macOS and Linux |
 | [Scoop bucket](https://github.com/openjavaformat/scoop-bucket) | `openjavaformat/open-java-format`, the native binary for Windows |
+| [apt repository](https://github.com/openjavaformat/apt) | `open-java-format` from `https://apt.openjavaformat.dev`, the native binary for Ubuntu and Debian |
 
 The Maven Central artifacts, the Gradle plugins and the files of a GitHub release are built by the
 [release workflow](https://github.com/openjavaformat/open-java-format/blob/main/.github/workflows/release.yml)
 from the tag of the version. The Maven plugin has a repository and a release workflow of its own,
 [openjavaformat/fmt-maven-plugin](https://github.com/openjavaformat/fmt-maven-plugin). The Homebrew
-formula and the Scoop manifest install the native binaries of the GitHub release. A workflow in the
-tap and one in the bucket move them to each new release within the hour, once they have installed
-and tested that release on every platform.
+formula, the Scoop manifest and the apt packages install the native binaries of the GitHub release.
+A workflow in the tap, one in the bucket and one in the apt repository move them to each new release
+within the hour, once they have installed and tested that release on every platform.
 
 ## Versions
 
