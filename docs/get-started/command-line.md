@@ -1,7 +1,50 @@
 # Command line
 
 The formatter comes as a native binary that needs no Java, and as a runnable jar for every platform
-the binaries do not cover.
+the binaries do not cover. On macOS and Linux, Homebrew installs the binary and keeps it current;
+mise installs it on Windows too, and pins its version per project.
+
+## Homebrew
+
+``` sh
+brew install openjavaformat/tap/open-java-format
+open-java-format --version
+```
+
+The formula comes from our tap, [openjavaformat/homebrew-tap](https://github.com/openjavaformat/homebrew-tap).
+It downloads the native binary of the latest release from GitHub, checks it against the release's
+checksums and puts `open-java-format` on your `PATH`. It covers macOS on Apple silicon and Intel and
+Linux on x86-64 and AArch64; on Windows, run it in WSL or download the binary below. Homebrew fetches
+the file with `curl`, so macOS does not quarantine it.
+
+`brew upgrade` takes each new release, at the latest an hour after it is published. A new minor
+version can change the output (see [Versions](../about.md#versions)): `brew pin open-java-format`
+holds the installed one.
+
+## mise
+
+``` sh
+mise use github:openjavaformat/open-java-format@{{ ojf_version }}
+open-java-format --version
+```
+
+[mise](https://mise.jdx.dev) installs the tool from the GitHub release with its
+[github backend](https://mise.jdx.dev/dev-tools/backends/github.html): it picks the native binary for
+your platform, checks it against the digest GitHub publishes and the release's build attestation, and
+puts `open-java-format` on your `PATH`. That works on macOS, on Linux with glibc and on Windows
+x86-64. On Windows on ARM and on musl-based Linux it would pick the wrong file, so use the jar there.
+
+`mise use` writes the version into the project's `mise.toml`, so everyone on the project formats with
+the same one:
+
+``` toml title="mise.toml"
+[tools]
+"github:openjavaformat/open-java-format" = "{{ ojf_version }}"
+```
+
+Add `-g` to install it for your user instead of one project. Without a version, `mise use` writes
+`latest`, and `mise upgrade` then takes each new release. A new minor version can change the output
+(see [Versions](../about.md#versions)), which is why the example pins one.
 
 ## Download
 
@@ -17,8 +60,8 @@ Pick the file for your platform from the
 | Windows, x86-64 | `open-java-format-windows_x86-64.exe` |
 | Anything else with Java 21 or later | `open-java-format-{{ ojf_version }}-all.jar` |
 
-There is no native binary for Windows on ARM or for musl-based Linux such as Alpine. Use the jar
-there.
+The Linux binaries need glibc 2.34 or later. There is no native binary for Windows on ARM or for
+musl-based Linux such as Alpine. Use the jar there.
 
 ``` sh title="Native binary, here for Apple silicon"
 curl -LO https://github.com/openjavaformat/open-java-format/releases/download/{{ ojf_version }}/open-java-format-macos_aarch64
