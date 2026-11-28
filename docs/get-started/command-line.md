@@ -1,8 +1,8 @@
 # Command line
 
 The formatter comes as a native binary that needs no Java, and as a runnable jar for every platform
-the binaries do not cover. On macOS and Linux, Homebrew installs the binary and keeps it current;
-mise installs it on Windows too, and pins its version per project.
+the binaries do not cover. Homebrew on macOS and Linux and Scoop on Windows install the binary and
+keep it current; mise installs it on all three and pins its version per project.
 
 ## Homebrew
 
@@ -14,12 +14,29 @@ open-java-format --version
 The formula comes from our tap, [openjavaformat/homebrew-tap](https://github.com/openjavaformat/homebrew-tap).
 It downloads the native binary of the latest release from GitHub, checks it against the release's
 checksums and puts `open-java-format` on your `PATH`. It covers macOS on Apple silicon and Intel and
-Linux on x86-64 and AArch64; on Windows, run it in WSL or download the binary below. Homebrew fetches
-the file with `curl`, so macOS does not quarantine it.
+Linux on x86-64 and AArch64; on Windows, use [Scoop](#scoop) or [mise](#mise). Homebrew fetches the
+file with `curl`, so macOS does not quarantine it.
 
 `brew upgrade` takes each new release, at the latest an hour after it is published. A new minor
 version can change the output (see [Versions](../about.md#versions)): `brew pin open-java-format`
 holds the installed one.
+
+## Scoop
+
+``` powershell
+scoop bucket add openjavaformat https://github.com/openjavaformat/scoop-bucket
+scoop install openjavaformat/open-java-format
+open-java-format --version
+```
+
+The manifest comes from our bucket, [openjavaformat/scoop-bucket](https://github.com/openjavaformat/scoop-bucket).
+It downloads the Windows x64 binary of the latest release from GitHub, checks it against the release's
+checksums and puts `open-java-format` on your `PATH`, for your user and without administrator rights.
+Scoop needs Git to add a bucket: run `scoop install git` first if you have none. On Windows 11 on
+ARM, Scoop installs the same x64 binary, and Windows runs it under emulation.
+
+`scoop update` fetches the bucket, and `scoop update open-java-format` then takes the new release, at
+the latest an hour after it is published. `scoop hold open-java-format` holds the installed version.
 
 ## mise
 
@@ -60,8 +77,9 @@ Pick the file for your platform from the
 | Windows, x86-64 | `open-java-format-windows_x86-64.exe` |
 | Anything else with Java 21 or later | `open-java-format-{{ ojf_version }}-all.jar` |
 
-The Linux binaries need glibc 2.34 or later. There is no native binary for Windows on ARM or for
-musl-based Linux such as Alpine. Use the jar there.
+The Linux binaries need glibc 2.34 or later. There is no native binary for Windows on ARM, but
+Windows 11 runs the x64 one under emulation. For musl-based Linux such as Alpine there is none: use
+the jar there.
 
 ``` sh title="Native binary, here for Apple silicon"
 curl -LO https://github.com/openjavaformat/open-java-format/releases/download/{{ ojf_version }}/open-java-format-macos_aarch64

@@ -155,11 +155,16 @@ on the [Maven plugin](get-started/maven.md) page.
 ### On the command line
 
 Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries native
-binaries for Linux, macOS and Windows, and a runnable jar for Java 21 or later. On macOS and Linux,
-Homebrew installs the binary.
+binaries for Linux, macOS and Windows, and a runnable jar for Java 21 or later. Homebrew installs
+the binary on macOS and Linux, and Scoop on Windows.
 
 ``` sh title="Install with Homebrew"
 brew install openjavaformat/tap/open-java-format
+```
+
+``` powershell title="Install with Scoop"
+scoop bucket add openjavaformat https://github.com/openjavaformat/scoop-bucket
+scoop install openjavaformat/open-java-format
 ```
 
 ``` sh title="Format files in place"
