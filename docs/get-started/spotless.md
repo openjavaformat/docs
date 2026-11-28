@@ -10,6 +10,9 @@ Apply both plugins. Ours adds an `open-java-format` step to the `java` format of
 so the `spotless` block needs no formatter step. If it still calls `palantirJavaFormat()`, remove
 that line.
 
+In an [Android module](gradle.md#android-projects) the step formats the Java files of the Android
+source sets. A `target` in the `spotless` block replaces them.
+
 === "Groovy"
 
     ``` groovy title="build.gradle"
