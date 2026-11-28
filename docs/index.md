@@ -155,7 +155,12 @@ on the [Maven plugin](get-started/maven.md) page.
 ### On the command line
 
 Every [release](https://github.com/openjavaformat/open-java-format/releases/latest) carries native
-binaries for Linux, macOS and Windows, and a runnable jar for Java 21 or later.
+binaries for Linux, macOS and Windows, and a runnable jar for Java 21 or later. On macOS and Linux,
+Homebrew installs the binary.
+
+``` sh title="Install with Homebrew"
+brew install openjavaformat/tap/open-java-format
+```
 
 ``` sh title="Format files in place"
 open-java-format --replace src/main/java/com/example/Hello.java

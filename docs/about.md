@@ -13,11 +13,14 @@ project exists is in the [manifesto](manifesto.md).
 | [Gradle Plugin Portal](https://plugins.gradle.org/plugin/dev.openjavaformat.java-format) | `dev.openjavaformat.java-format` |
 | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34359-open-java-format) | the IntelliJ IDEA plugin |
 | [GitHub Releases](https://github.com/openjavaformat/open-java-format/releases/latest) | native binaries, the runnable jar, the Gradle, IntelliJ IDEA and Eclipse plugins |
+| [Homebrew tap](https://github.com/openjavaformat/homebrew-tap) | `openjavaformat/tap/open-java-format`, the native binary for macOS and Linux |
 
 The Maven Central artifacts, the Gradle plugins and the files of a GitHub release are built by the
 [release workflow](https://github.com/openjavaformat/open-java-format/blob/main/.github/workflows/release.yml)
 from the tag of the version. The Maven plugin has a repository and a release workflow of its own,
-[openjavaformat/fmt-maven-plugin](https://github.com/openjavaformat/fmt-maven-plugin).
+[openjavaformat/fmt-maven-plugin](https://github.com/openjavaformat/fmt-maven-plugin). The Homebrew
+formula installs the native binaries of the GitHub release: a workflow in the tap moves it to each
+new release within the hour, once it has installed and tested it on every platform.
 
 ## Versions
 
