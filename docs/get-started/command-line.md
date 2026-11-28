@@ -1,8 +1,9 @@
 # Command line
 
 The formatter comes as a native binary that needs no Java, and as a runnable jar for every platform
-the binaries do not cover. Homebrew on macOS and Linux and Scoop on Windows install the binary and
-keep it current; mise installs it on all three and pins its version per project.
+the binaries do not cover. Homebrew on macOS and Linux, apt on Ubuntu and Debian and Scoop on
+Windows install the binary and keep it current; mise installs it on all three and pins its version
+per project.
 
 ## Homebrew
 
@@ -20,6 +21,27 @@ file with `curl`, so macOS does not quarantine it.
 `brew upgrade` takes each new release, at the latest an hour after it is published. A new minor
 version can change the output (see [Versions](../about.md#versions)): `brew pin open-java-format`
 holds the installed one.
+
+## apt
+
+``` sh
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://apt.openjavaformat.dev/key.asc | sudo tee /etc/apt/keyrings/open-java-format.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/open-java-format.asc] https://apt.openjavaformat.dev stable main" \
+  | sudo tee /etc/apt/sources.list.d/open-java-format.list
+sudo apt update
+sudo apt install open-java-format
+```
+
+The lines add our apt repository, [openjavaformat/apt](https://github.com/openjavaformat/apt), with
+the key that signs it, and install the native binary of the latest release as
+`/usr/bin/open-java-format`. The package is there for amd64 and arm64 and needs glibc 2.34 or later:
+Ubuntu 22.04 or Debian 12 and newer.
+
+`sudo apt upgrade` takes each new release, at the latest an hour after it is published. A new minor
+version can change the output (see [Versions](../about.md#versions)):
+`sudo apt-mark hold open-java-format` holds the installed one. The repository carries the latest
+version only; older versions are binaries to download, as below.
 
 ## Scoop
 
