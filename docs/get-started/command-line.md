@@ -1,7 +1,8 @@
 # Command line
 
 The formatter comes as a native binary that needs no Java, and as a runnable jar for every platform
-the binaries do not cover. On macOS and Linux, Homebrew installs the binary and keeps it current.
+the binaries do not cover. On macOS and Linux, Homebrew installs the binary and keeps it current;
+mise installs it on Windows too, and pins its version per project.
 
 ## Homebrew
 
@@ -19,6 +20,31 @@ the file with `curl`, so macOS does not quarantine it.
 `brew upgrade` takes each new release, at the latest an hour after it is published. A new minor
 version can change the output (see [Versions](../about.md#versions)): `brew pin open-java-format`
 holds the installed one.
+
+## mise
+
+``` sh
+mise use github:openjavaformat/open-java-format@{{ ojf_version }}
+open-java-format --version
+```
+
+[mise](https://mise.jdx.dev) installs the tool from the GitHub release with its
+[github backend](https://mise.jdx.dev/dev-tools/backends/github.html): it picks the native binary for
+your platform, checks it against the digest GitHub publishes and the release's build attestation, and
+puts `open-java-format` on your `PATH`. That works on macOS, on Linux with glibc and on Windows
+x86-64. On Windows on ARM and on musl-based Linux it would pick the wrong file, so use the jar there.
+
+`mise use` writes the version into the project's `mise.toml`, so everyone on the project formats with
+the same one:
+
+``` toml title="mise.toml"
+[tools]
+"github:openjavaformat/open-java-format" = "{{ ojf_version }}"
+```
+
+Add `-g` to install it for your user instead of one project. Without a version, `mise use` writes
+`latest`, and `mise upgrade` then takes each new release. A new minor version can change the output
+(see [Versions](../about.md#versions)), which is why the example pins one.
 
 ## Download
 
