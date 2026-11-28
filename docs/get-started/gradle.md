@@ -117,6 +117,41 @@ build (`--parallel`) works too.
     }
     ```
 
+## Android projects
+
+In an Android module, apply the plugin next to the Android Gradle plugin, 9.1 or later:
+`com.android.application`, `com.android.library`, `com.android.dynamic-feature` or
+`com.android.test`. These do not apply `java`, and the plugin does not need it there.
+
+=== "Groovy"
+
+    ``` groovy title="app/build.gradle"
+    plugins {
+        id 'com.android.application'
+        id 'dev.openjavaformat.java-format'
+    }
+    ```
+
+=== "Kotlin"
+
+    ``` kotlin title="app/build.gradle.kts"
+    plugins {
+        id("com.android.application")
+        id("dev.openjavaformat.java-format")
+    }
+    ```
+
+`formatDiff` and the [Spotless](spotless.md) step then cover the Java files in the `java`
+directories of every Android source set: `main`, `test`, `androidTest`, and those of the build
+types and flavors. Java files in the `kotlin` directories are left out. The plugin reads the source
+sets from the build's own Android Gradle plugin and brings none of its own, and it needs no Android
+SDK.
+
+!!! warning "Up to 21.1.1: nothing in Android modules"
+
+    The plugin did nothing in a module without the `java` plugin: there was no `formatDiff`, and
+    `spotlessCheck` passed whatever the files held.
+
 ## Configuration cache
 
 The plugin works with Gradle's configuration cache: `formatDiff`, the [Spotless](spotless.md) step
